@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 html {
-  padding: 2rem;
+  background-color: whitesmoke;
+}
+
+body {
+  background-color: var(--pico-background-color);
 }
