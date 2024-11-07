@@ -23,13 +23,16 @@ export default function RootLayout({
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${GOOGLE_ADSENSE}`}
           crossOrigin="anonymous"></Script>
       </head>
-      <body className="max-w-[450px] m-auto h-screen">
+      <body className="max-w-mobile m-auto min-h-screen bg-default">
         <header>
           <h1>Filter Recipe</h1>
         </header>
-        <main className="">{children}</main>
+        <main className="container-fluid">
+          {children}
+          <div className="h-16" />
+        </main>
         <GoogleAnalytics gaId={GOOGLE_ANALYITICS} />
-        <footer>
+        <footer className="fixed bottom-0 max-w-mobile w-full bg-default">
           <Navigation />
         </footer>
       </body>

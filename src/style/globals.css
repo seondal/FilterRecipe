@@ -5,7 +5,3 @@
 html {
   background-color: whitesmoke;
 }
-
-body {
-  background-color: var(--pico-background-color);
-}
