@@ -8,8 +8,19 @@ const ETC = "기타";
 
 export default function UploadPage() {
   const [selectedMain, setSelectedMain] = useState(NO_SELECTION);
+
   return (
-    <form className="*:text-xs">
+    <form className="*:text-xs" encType="multipart/form-data">
+      <fieldset className="flex">
+        <label>
+          보정 전 사진
+          <input type="file" name="before" accept="image/*" />
+        </label>
+        <label>
+          보정 후 사진
+          <input type="file" name="after" accept="image/*" required />
+        </label>
+      </fieldset>
       <label>
         레시피 이름
         <input
@@ -19,7 +30,6 @@ export default function UploadPage() {
           required
         />
       </label>
-
       <label>
         카테고리
         <fieldset className="flex">
