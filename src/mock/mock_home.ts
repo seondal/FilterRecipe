@@ -1,11 +1,12 @@
 import { RecipeI } from "@/interface/recipe";
 
 export const MockRecipe: RecipeI = {
+  id: 1,
   title: "지브리 감성 뭉게구름 보정법",
   description: "뭉게뭉게뭉게구름",
   image: {
-    before: "@/mock/1.png",
-    after: "@/mock/2.png",
+    before: "/mock/1.png",
+    after: "/mock/2.png",
   },
   category: {
     main: "하늘",

@@ -17,6 +17,7 @@ export interface PropertiesI {
 }
 
 export interface RecipeI {
+  id: number;
   title: string;
   description?: string;
   image: {
