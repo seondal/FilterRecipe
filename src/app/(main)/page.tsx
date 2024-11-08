@@ -2,24 +2,32 @@
 
 import { useState } from "react";
 import Category from "./Category";
+import { useSearchParams } from "next/navigation";
+import Feed from "./Feed";
 
 export default function Page() {
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("search");
+
   const [searchActive, setSearchActive] = useState(false);
   const [categoryActive, setCategoryActive] = useState(false);
 
   return (
     <>
       <fieldset className="grid">
-        <input
-          name="search"
-          type="search"
-          placeholder="키워드로 검색하기"
-          onFocus={() => {
-            setCategoryActive(false);
-            setSearchActive(true);
-          }}
-          onBlur={() => setSearchActive(false)}
-        />
+        <form>
+          <input
+            name="search"
+            type="search"
+            placeholder="키워드로 검색하기"
+            onFocus={() => {
+              setCategoryActive(false);
+              setSearchActive(true);
+            }}
+            onBlur={() => setSearchActive(false)}
+            defaultValue={keyword ?? ""}
+          />
+        </form>
         <label>
           <input
             name="terms"
@@ -31,8 +39,8 @@ export default function Page() {
           카테고리
         </label>
       </fieldset>
-      {searchActive && <div className="bg-black">검색창</div>}
       {categoryActive && <Category />}
+      {keyword ? <h4>{keyword} 검색 결과</h4> : <Feed />}
     </>
   );
 }
