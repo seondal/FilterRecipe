@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Category from "./Category";
 
 export default function Page() {
   const [searchActive, setSearchActive] = useState(false);
@@ -31,7 +32,7 @@ export default function Page() {
         </label>
       </fieldset>
       {searchActive && <div className="bg-black">검색창</div>}
-      {categoryActive && <div>카테고리창</div>}
+      {categoryActive && <Category />}
     </>
   );
 }
