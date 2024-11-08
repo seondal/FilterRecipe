@@ -27,7 +27,7 @@ export default function RootLayout({
         <header>
           <h1>Filter Recipe</h1>
         </header>
-        <main className="container-fluid">
+        <main className="p-4">
           {children}
           <div className="h-16" />
         </main>
