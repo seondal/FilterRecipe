@@ -10,7 +10,13 @@ export default function Category({ onClose }: CategoryI) {
   const searchParam = useURLSearchParams();
 
   function handleSelectCategory(name: string) {
-    searchParam.set({ category: name });
+    const param = { category: name };
+    searchParam.del(param);
+    // if (searchParam.has(param)) {
+    //   searchParam.del(param);
+    // } else {
+    //   searchParam.set(param);
+    // }
   }
 
   return (

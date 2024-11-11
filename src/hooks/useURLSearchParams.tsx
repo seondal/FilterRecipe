@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-type NewParamsType = { [key: string]: string };
+type ParamsType = { [key: string]: string };
 
 const useURLSearchParams = () => {
   const router = useRouter();
@@ -10,22 +10,16 @@ const useURLSearchParams = () => {
   const searchParams = useSearchParams();
   const newSearchParams = new URLSearchParams(searchParams.toString());
 
-  const setNewParams = (newParams: NewParamsType) => {
+  const get = () => Object.fromEntries(newSearchParams);
+
+  const has = (newParams: ParamsType) => {
     for (const [key, value] of Object.entries(newParams)) {
-      if (value) {
-        const existingValues = newSearchParams.get(key);
-        const updatedValues = existingValues
-          ? `${existingValues},${value}`
-          : value;
-        newSearchParams.set(key, updatedValues);
-      } else {
-        newSearchParams.delete(key);
-      }
+      let newQuery = newSearchParams.get(key)?.split(",");
+      return newQuery?.find((item) => item === value);
     }
-    return newSearchParams.toString();
   };
 
-  const set = (newParams: NewParamsType) => {
+  const add = (newParams: ParamsType) => {
     for (const [key, value] of Object.entries(newParams)) {
       let newQuery = newSearchParams.get(key)?.split(",");
       if (newQuery) {
@@ -35,10 +29,25 @@ const useURLSearchParams = () => {
         newSearchParams.set(key, value);
       }
     }
-    return router.push(`${pathname}?${newSearchParams.toString()}`);
+    return router.replace(`${pathname}?${newSearchParams.toString()}`);
   };
 
-  return { searchParams: Object.fromEntries(newSearchParams), set };
+  const del = (newParams: ParamsType) => {
+    for (const [key, value] of Object.entries(newParams)) {
+      let newQuery = newSearchParams.get(key)?.split(",");
+      if (newQuery) {
+        newQuery = newQuery.filter((item) => item != value);
+        console.log("🚀 ~ del ~ newQuery:", newQuery);
+
+        if (newQuery.length === 0) {
+          newSearchParams.delete(key);
+        } else newSearchParams.set(key, newQuery.toString());
+      }
+    }
+    return router.replace(`${pathname}?${newSearchParams.toString()}`);
+  };
+
+  return { get, add, del, has };
 };
 
 export default useURLSearchParams;
