@@ -1,20 +1,22 @@
 "use client";
 
+import { RecipeI } from "@/interface/recipe";
 import { MockRecipe, MockRecipe2 } from "@/mock/mock_home";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function RecipeDetailCard() {
-  const data = MockRecipe;
+interface RecipeDetailCardI {
+  data: RecipeI;
+}
 
+export default function RecipeDetailCard({ data }: RecipeDetailCardI) {
   const [showBefore, setShowBefore] = useState(false);
   const [showRecipe, setShowRecipe] = useState(false);
 
   return (
-    <article className="w-full max-h-[90vh] overflow-y-auto">
+    <article className="w-full max-h-[90vh] overflow-y-auto z-50">
       <header>
         <strong>{data.title}</strong>
-        <button>close</button>
       </header>
       <div className="relative w-full h-auto aspect-square">
         {showRecipe && (

@@ -7,9 +7,10 @@ type ModalProps = {
 
 const Modal = ({ onClose, children }: ModalProps) => {
   return (
-    <div
-      className="fixed max-w-mobile inset-0 m-auto p-4 bg-black bg-opacity-30 flex justify-center items-center overflow-hidden"
-      onClick={onClose}>
+    <div className="z-40 fixed max-w-mobile inset-0 m-auto p-4 bg-black bg-opacity-30 flex justify-center items-center overflow-hidden">
+      <button className="absolute top-1 right-1" onClick={onClose}>
+        X
+      </button>
       {children}
     </div>
   );
