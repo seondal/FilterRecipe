@@ -1,9 +1,18 @@
+"use client";
+
 import { CATEGORY } from "@/constants";
+import useURLSearchParams from "@/hooks/useURLSearchParams";
 
 interface CategoryI {
   onClose: () => void;
 }
 export default function Category({ onClose }: CategoryI) {
+  const searchParam = useURLSearchParams();
+
+  function handleSelectCategory(name: string) {
+    searchParam.set({ category: name });
+  }
+
   return (
     <article className="">
       <header>
@@ -12,7 +21,11 @@ export default function Category({ onClose }: CategoryI) {
       {CATEGORY.map((main, idx) => (
         <div key={idx} className="flex">
           <label>
-            <input type="checkbox" name="main" />
+            <input
+              type="checkbox"
+              name="main"
+              onClick={() => handleSelectCategory(main.text)}
+            />
             <strong>{main.text}</strong>
           </label>
           {main.sub.map((sub, idx) => (
