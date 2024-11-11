@@ -23,6 +23,7 @@ const useURLSearchParams = () => {
     for (const [key, value] of Object.entries(newParams)) {
       let newQuery = newSearchParams.get(key)?.split(",");
       if (newQuery) {
+        if (has(newParams)) return;
         newQuery.push(value);
         newSearchParams.set(key, newQuery.toString());
       } else {

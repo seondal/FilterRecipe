@@ -11,12 +11,11 @@ export default function Category({ onClose }: CategoryI) {
 
   function handleSelectCategory(name: string) {
     const param = { category: name };
-    searchParam.del(param);
-    // if (searchParam.has(param)) {
-    //   searchParam.del(param);
-    // } else {
-    //   searchParam.set(param);
-    // }
+    if (searchParam.has(param)) {
+      searchParam.del(param);
+    } else {
+      searchParam.add(param);
+    }
   }
 
   return (
@@ -36,7 +35,11 @@ export default function Category({ onClose }: CategoryI) {
           </label>
           {main.sub.map((sub, idx) => (
             <label key={idx}>
-              <input type="checkbox" name="sub" />
+              <input
+                type="checkbox"
+                name="sub"
+                onClick={() => handleSelectCategory(sub)}
+              />
               {sub}
             </label>
           ))}
