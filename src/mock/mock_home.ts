@@ -93,4 +93,11 @@ export const MockRecipe2: RecipeI = {
   // },
 };
 
-export const MockHome = [MockRecipe, MockRecipe, MockRecipe, MockRecipe];
+export const MockHome = [
+  MockRecipe,
+  MockRecipe2,
+  MockRecipe,
+  MockRecipe2,
+  MockRecipe,
+  MockRecipe2,
+];
