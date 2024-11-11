@@ -4,27 +4,26 @@ import { useState } from "react";
 import Category from "./Category";
 import { useSearchParams } from "next/navigation";
 import Feed from "./Feed";
+import Modal from "@/components/Modal";
 
 export default function Page() {
   const searchParams = useSearchParams();
   const keyword = searchParams.get("search");
 
-  const [searchActive, setSearchActive] = useState(false);
   const [categoryActive, setCategoryActive] = useState(false);
+
+  function onClose() {
+    setCategoryActive(false);
+  }
 
   return (
     <>
-      <fieldset className="grid">
+      <fieldset className="flex">
         <form>
           <input
             name="search"
             type="search"
             placeholder="키워드로 검색하기"
-            onFocus={() => {
-              setCategoryActive(false);
-              setSearchActive(true);
-            }}
-            onBlur={() => setSearchActive(false)}
             defaultValue={keyword ?? ""}
           />
         </form>
@@ -39,7 +38,11 @@ export default function Page() {
           카테고리
         </label>
       </fieldset>
-      {categoryActive && <Category />}
+      {categoryActive && (
+        <Modal onClose={onClose} layout="bottom">
+          <Category onClose={onClose} />
+        </Modal>
+      )}
       {keyword ? <h4>{keyword} 검색 결과</h4> : <Feed />}
     </>
   );

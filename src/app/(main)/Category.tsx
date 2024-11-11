@@ -1,10 +1,16 @@
 import { CATEGORY } from "@/constants";
 
-export default function Category() {
+interface CategoryI {
+  onClose: () => void;
+}
+export default function Category({ onClose }: CategoryI) {
   return (
-    <article className="grid">
+    <article className="">
+      <header>
+        <h4>카테고리</h4>
+      </header>
       {CATEGORY.map((main, idx) => (
-        <div key={idx}>
+        <div key={idx} className="flex">
           <label>
             <input type="checkbox" name="main" />
             <strong>{main.text}</strong>
@@ -17,6 +23,9 @@ export default function Category() {
           ))}
         </div>
       ))}
+      <footer>
+        <button onClick={onClose}>결정하기</button>
+      </footer>
     </article>
   );
 }
