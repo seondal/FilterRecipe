@@ -19,14 +19,19 @@ export interface PropertiesI {
 export interface RecipeI {
   id: number;
   title: string;
+  source?: {
+    name: string;
+    url: string;
+  };
   description?: string;
   image: {
-    before?: string;
+    before: string;
     after: string;
   };
   category: {
     main: string;
     sub: string;
   };
-  property: PropertiesI;
+  // property: PropertiesI;
+  recipe: { property: string; value: number }[];
 }
