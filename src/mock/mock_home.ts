@@ -9,8 +9,8 @@ export const MockRecipe: RecipeI = {
     url: "https://instagram.com/dev_seondal",
   },
   image: {
-    before: "/mock/1.png",
-    after: "/mock/2.png",
+    before: "/mock/before.png",
+    after: "/mock/after.png",
   },
   category: {
     main: "하늘",
@@ -48,8 +48,8 @@ export const MockRecipe2: RecipeI = {
   description:
     "설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자",
   image: {
-    before: "/mock/collarge.png",
-    after: "/mock/rowlarge.png",
+    before: "/mock/before2.png",
+    after: "/mock/after2.png",
   },
   category: {
     main: "하늘",
