@@ -9,7 +9,11 @@ interface ModalI {
 }
 
 const StyleByLayout: Record<LayoutT, React.CSSProperties> = {
-  center: { alignItems: "center", padding: "4rem", justifyContent: "center" },
+  center: {
+    alignItems: "center",
+    padding: "4rem 2rem",
+    justifyContent: "center",
+  },
   bottom: {
     alignItems: "end",
     padding: "0rem",

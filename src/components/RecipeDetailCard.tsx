@@ -14,7 +14,7 @@ export default function RecipeDetailCard({ data }: RecipeDetailCardI) {
   const [showRecipe, setShowRecipe] = useState(false);
 
   return (
-    <article className="w-full max-h-[90vh] overflow-y-auto">
+    <article className="max-h-[80vh] overflow-y-auto">
       <header>
         <h3>{data.title}</h3>
       </header>

@@ -48,8 +48,8 @@ export const MockRecipe2: RecipeI = {
   description:
     "설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자",
   image: {
-    before: "/mock/1.png",
-    after: "/mock/2.png",
+    before: "/mock/collarge.png",
+    after: "/mock/rowlarge.png",
   },
   category: {
     main: "하늘",
