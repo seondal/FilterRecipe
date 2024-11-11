@@ -12,7 +12,7 @@ const config: Config = {
         default: "var(--pico-background-color)",
       },
       maxWidth: {
-        mobile: "520px",
+        mobile: "600px",
       },
     },
   },

@@ -16,7 +16,7 @@ export default function RecipeDetailCard({ data }: RecipeDetailCardI) {
   return (
     <article className="w-full max-h-[90vh] overflow-y-auto z-50">
       <header>
-        <strong>{data.title}</strong>
+        <h3>{data.title}</h3>
       </header>
       <div className="relative w-full h-auto aspect-square">
         {showRecipe && (
@@ -35,13 +35,11 @@ export default function RecipeDetailCard({ data }: RecipeDetailCardI) {
         )}
       </div>
       <footer>
-        <small>
-          <b>
-            #{data.category.main} #{data.category.sub}
-          </b>
-          &nbsp;
-          {data.description}
-        </small>
+        <b>
+          #{data.category.main} #{data.category.sub}
+        </b>
+        &nbsp;
+        {data.description}
         <hr />
         <button onClick={() => setShowRecipe((cur) => !cur)}>
           {showRecipe ? "Hide Recipe" : "Show Recipe"}

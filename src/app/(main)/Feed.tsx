@@ -5,7 +5,7 @@ export default function Feed() {
   return (
     <>
       <h4>인기 레시피</h4>
-      <div className="flex gap-1 flex-wrap justify-center w-full">
+      <div className="flex flex-wrap justify-center">
         {MockHome.map((item, idx) => (
           <RecipeSmallCard data={item} key={idx} />
         ))}

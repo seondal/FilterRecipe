@@ -45,7 +45,8 @@ export const MockRecipe: RecipeI = {
 export const MockRecipe2: RecipeI = {
   id: 2,
   title: "제목은최대20글자입니다34567890",
-  description: "뭉게뭉게뭉게구름",
+  description:
+    "설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자설명은최대200자",
   image: {
     before: "/mock/1.png",
     after: "/mock/2.png",
