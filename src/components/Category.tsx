@@ -32,8 +32,8 @@ export default function Category({ open, onClose }: CategoryI) {
     <dialog open={open}>
       <article>
         <header>
+          <button aria-label="Close" rel="prev" onClick={onClose}></button>
           <h4>카테고리</h4>
-          <XMarkIcon className="icon-button" onClick={onClose} />
         </header>
         {CATEGORY.map((main) => (
           <div key={main.text} className="flex gap-4 mb-4">

@@ -32,8 +32,8 @@ export default function RecipeDetailCard({
     <dialog open={open}>
       <article className="">
         <header>
+          <button aria-label="Close" rel="prev" onClick={onClose}></button>
           <h4>{data.title}</h4>
-          <XMarkIcon className="icon-button" onClick={onClose} />
         </header>
         <div className="relative aspect-square">
           {showRecipe && (

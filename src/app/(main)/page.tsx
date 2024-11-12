@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Category from "./Category";
+import Category from "../../components/Category";
 import { useSearchParams } from "next/navigation";
 import Feed from "./Feed";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";

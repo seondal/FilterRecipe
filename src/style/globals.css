@@ -19,10 +19,6 @@ input:not([type="checkbox"], [type="radio"]) {
   margin-bottom: 0px;
 }
 
-article > header {
-  @apply flex justify-between items-center;
-}
-
 .icon-button {
   @apply size-10 fill-[var(--pico-color)];
 }
