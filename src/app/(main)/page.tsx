@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Category from "../../components/Category";
 import { useSearchParams } from "next/navigation";
 import Feed from "./Feed";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
+import Category from "@/components/Category";
 
 export default function Page() {
   const searchParams = useSearchParams();
