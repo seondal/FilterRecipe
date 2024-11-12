@@ -1,7 +1,10 @@
 "use client";
 
-import { Bars3Icon } from "@heroicons/react/20/solid";
-import { ArrowUpTrayIcon, BackspaceIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowUpTrayIcon,
+  BackspaceIcon,
+  Bars3Icon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -11,20 +14,21 @@ export default function Header() {
   const isMain = pathname === "/";
 
   return (
-    <nav>
+    <nav className="px-4 items-center">
       <h1>Filter Recipe</h1>
       {isMain ? (
-        <ul>
+        <nav className="gap-4">
           <Link href="/upload">
             <button>
               <ArrowUpTrayIcon className="icon-text" />
-              업로드
+              등록하기
             </button>
           </Link>
-          <Link href="/mypage">
-            <Bars3Icon className="icon-button" />
-          </Link>
-        </ul>
+          <Bars3Icon
+            className="icon-button"
+            onClick={() => router.push("/mypage")}
+          />
+        </nav>
       ) : (
         <BackspaceIcon onClick={() => router.back()} className="size-12" />
       )}

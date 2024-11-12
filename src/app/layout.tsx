@@ -6,7 +6,7 @@ import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { GOOGLE_ADSENSE, GOOGLE_ANALYITICS } from "@/constants/env";
 import { META_DATA } from "@/constants/META_DATA";
-import Header from "@/components/layout/Header";
+import Header from "@/components/Header";
 
 export const metadata = META_DATA;
 
@@ -27,10 +27,7 @@ export default function RootLayout({
         <header>
           <Header />
         </header>
-        <main className="p-4">
-          {children}
-          <div className="h-16" />
-        </main>
+        <main className="p-4">{children}</main>
         <GoogleAnalytics gaId={GOOGLE_ANALYITICS} />
       </body>
     </html>
