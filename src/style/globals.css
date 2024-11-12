@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  background-color: whitesmoke;
+  background-color: var(--pico-form-element-background-color);
   font-size: 14px;
 }
 
