@@ -1,5 +1,6 @@
 "use client";
 
+import FileInput from "@/components/FileInput";
 import { CATEGORY, PROPERTIES } from "@/constants";
 import { useState } from "react";
 
@@ -10,17 +11,7 @@ export default function UploadPage() {
   const [selectedMain, setSelectedMain] = useState(NO_SELECTION);
 
   return (
-    <form className="*:text-xs" encType="multipart/form-data">
-      <fieldset className="flex">
-        <label>
-          보정 전 사진
-          <input type="file" name="before" accept="image/*" />
-        </label>
-        <label>
-          보정 후 사진
-          <input type="file" name="after" accept="image/*" required />
-        </label>
-      </fieldset>
+    <form encType="multipart/form-data">
       <label>
         레시피 이름
         <input
@@ -30,6 +21,14 @@ export default function UploadPage() {
           required
         />
       </label>
+      <hr />
+      <fieldset className="flex *:flex-grow gap-4">
+        <FileInput label="레시피 적용 전" />{" "}
+        <FileInput label="레시피 적용 후" />
+      </fieldset>
+      <small>
+        레시피기 적용되지 않았거나 부적절한 이미지는 삭제될 수 있어요
+      </small>
       <label>
         카테고리
         <fieldset className="flex">
@@ -59,7 +58,7 @@ export default function UploadPage() {
         </fieldset>
       </label>
 
-      <fieldset className="flex flex-wrap">
+      <fieldset className="flex flex-wrap *:w-20">
         {PROPERTIES.map((item) => (
           <label key={item.key}>
             {item.name}
@@ -74,13 +73,11 @@ export default function UploadPage() {
           </label>
         ))}
       </fieldset>
-
       <label>
         설명 <textarea maxLength={300} name="description" />
       </label>
       <input
         type="submit"
-        className="outline"
         value="레시피 등록하기"
         disabled={selectedMain === NO_SELECTION}
       />

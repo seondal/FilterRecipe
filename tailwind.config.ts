@@ -10,6 +10,8 @@ const config: Config = {
     extend: {
       colors: {
         primary: "var(--pico-primary-background)",
+        secondary: "var(--pico-secondary-background)",
+        default: "var(--pico-color)",
       },
       backgroundColor: {
         default: "var(--pico-background-color)",
