@@ -4,12 +4,12 @@ import { useState } from "react";
 import Category from "./Category";
 import { useSearchParams } from "next/navigation";
 import Feed from "./Feed";
-import Modal from "@/components/Modal";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 
 export default function Page() {
   const searchParams = useSearchParams();
-  const keyword = searchParams.get("search");
+  const keywordQuery = searchParams.get("search");
+  const categoryQuery = searchParams.get("category");
 
   const [categoryActive, setCategoryActive] = useState(false);
 
@@ -25,18 +25,18 @@ export default function Page() {
             name="search"
             type="search"
             placeholder="키워드로 검색하기"
-            defaultValue={keyword ?? ""}
+            defaultValue={keywordQuery ?? ""}
           />
         </form>
         <button
-          className="outline"
+          className={categoryQuery ? "outline" : "outline secondary"}
           onClick={() => setCategoryActive((cur) => !cur)}>
           <AdjustmentsHorizontalIcon className="icon-text" />
           카테고리
         </button>
       </fieldset>
       <Category onClose={onClose} open={categoryActive} />
-      {keyword ? <h4>{keyword} 검색 결과</h4> : <Feed />}
+      {keywordQuery ? <h4>{keywordQuery} 검색 결과</h4> : <Feed />}
     </>
   );
 }
