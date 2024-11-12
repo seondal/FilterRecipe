@@ -1,5 +1,7 @@
 "use client";
 
+import { Bars3Icon } from "@heroicons/react/20/solid";
+import { ArrowUpTrayIcon, BackspaceIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -13,11 +15,18 @@ export default function Header() {
       <h1>Filter Recipe</h1>
       {isMain ? (
         <ul>
-          <Link href="/upload">업로드</Link>
-          <Link href="/mypage">마이페이지</Link>
+          <Link href="/upload">
+            <button>
+              <ArrowUpTrayIcon className="icon-text" />
+              업로드
+            </button>
+          </Link>
+          <Link href="/mypage">
+            <Bars3Icon className="icon-button" />
+          </Link>
         </ul>
       ) : (
-        <button onClick={() => router.back()}>뒤로가기</button>
+        <BackspaceIcon onClick={() => router.back()} className="size-12" />
       )}
     </nav>
   );

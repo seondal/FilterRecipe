@@ -1,3 +1,4 @@
+import { XMarkIcon } from "@heroicons/react/20/solid";
 import React, { ReactNode } from "react";
 
 type LayoutT = "center" | "bottom";
@@ -26,9 +27,10 @@ const Modal = ({ onClose, children, layout = "center" }: ModalI) => {
       className="z-40 fixed max-w-mobile inset-0 m-auto bg-black bg-opacity-30 flex overflow-hidden"
       style={StyleByLayout[layout]}
       onClick={onClose}>
-      <button className="absolute top-1 right-1 outline" onClick={onClose}>
-        X
-      </button>
+      <XMarkIcon
+        className="absolute top-1 right-1 icon-button"
+        onClick={onClose}
+      />
       <div className="z-50 w-full" onClick={(e) => e.stopPropagation()}>
         {children}
       </div>

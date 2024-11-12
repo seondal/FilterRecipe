@@ -2,6 +2,14 @@
 
 import { RecipeI } from "@/interface/recipe";
 import { MockRecipe, MockRecipe2 } from "@/mock/mock_home";
+import {
+  ArrowPathIcon,
+  BookmarkIcon,
+  EyeIcon,
+  EyeSlashIcon,
+  ShareIcon,
+  SparklesIcon,
+} from "@heroicons/react/20/solid";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -29,9 +37,19 @@ export default function RecipeDetailCard({ data }: RecipeDetailCardI) {
           </div>
         )}
         {showBefore ? (
-          <Image src={data.image.before} alt="" fill objectFit="cover" />
+          <Image
+            src={data.image.before}
+            alt=""
+            fill
+            style={{ objectFit: "cover" }}
+          />
         ) : (
-          <Image src={data.image.after} alt="" fill objectFit="cover" />
+          <Image
+            src={data.image.after}
+            alt=""
+            fill
+            style={{ objectFit: "cover" }}
+          />
         )}
       </div>
       <footer>
@@ -41,14 +59,36 @@ export default function RecipeDetailCard({ data }: RecipeDetailCardI) {
         &nbsp;
         {data.description}
         <hr />
-        <button onClick={() => setShowRecipe((cur) => !cur)}>
-          {showRecipe ? "Hide Recipe" : "Show Recipe"}
-        </button>
-        <button onClick={() => setShowBefore((cur) => !cur)}>
-          {showBefore ? "After 보기" : "Before 보기"}
-        </button>
-        <button>Bookmark</button>
-        <button>Share</button>
+        <nav>
+          <button onClick={() => setShowRecipe((cur) => !cur)}>
+            {showRecipe ? (
+              <>
+                <EyeSlashIcon className="icon-text" /> 레시피 닫기
+              </>
+            ) : (
+              <>
+                <EyeIcon className="icon-text" /> 레시피 보기
+              </>
+            )}
+          </button>
+          <button onClick={() => setShowBefore((cur) => !cur)}>
+            {showBefore ? (
+              <>
+                <SparklesIcon className="icon-text" /> 보정 후
+              </>
+            ) : (
+              <>
+                <ArrowPathIcon className="icon-text" /> 보정 전
+              </>
+            )}
+          </button>
+          <button className="outline">
+            <BookmarkIcon className="icon-in-button" />
+          </button>
+          <button className="outline">
+            <ShareIcon className="icon-in-button" />
+          </button>
+        </nav>
       </footer>
     </article>
   );

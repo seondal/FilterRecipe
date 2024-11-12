@@ -6,3 +6,19 @@ html {
   background-color: whitesmoke;
   font-size: 14px;
 }
+
+svg {
+  cursor: pointer;
+}
+
+.icon-button {
+  @apply size-12 fill-[var(--pico-color)];
+}
+
+.icon-in-button {
+  @apply size-8;
+}
+
+.icon-text {
+  @apply size-5 mr-2;
+}

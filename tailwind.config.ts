@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "var(--pico-primary-background)",
+      },
       backgroundColor: {
         default: "var(--pico-background-color)",
       },
