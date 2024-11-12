@@ -24,7 +24,7 @@ article > header {
 }
 
 .icon-button {
-  @apply size-12 fill-[var(--pico-color)];
+  @apply size-10 fill-[var(--pico-color)];
 }
 
 .icon-in-button {

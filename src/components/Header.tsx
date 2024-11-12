@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <nav className="px-4 items-center">
-      <h1>Filter Recipe</h1>
+      <h1 style={{ marginBottom: "0px" }}>Filter Recipe</h1>
       {isMain ? (
         <nav className="gap-4">
           <Link href="/upload">
