@@ -35,11 +35,7 @@ export default function Page() {
           카테고리
         </button>
       </fieldset>
-      {categoryActive && (
-        <Modal onClose={onClose} layout="bottom">
-          <Category onClose={onClose} />
-        </Modal>
-      )}
+      <Category onClose={onClose} open={categoryActive} />
       {keyword ? <h4>{keyword} 검색 결과</h4> : <Feed />}
     </>
   );

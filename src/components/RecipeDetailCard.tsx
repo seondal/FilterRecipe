@@ -1,5 +1,6 @@
 "use client";
 
+import { ModalI } from "@/interface/component";
 import { RecipeI } from "@/interface/recipe";
 import { MockRecipe, MockRecipe2 } from "@/mock/mock_home";
 import {
@@ -9,57 +10,63 @@ import {
   EyeSlashIcon,
   ShareIcon,
   SparklesIcon,
+  XMarkIcon,
 } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import { useState } from "react";
 
-interface RecipeDetailCardI {
+interface RecipeDetailCardI extends ModalI {
   data: RecipeI;
 }
 
-export default function RecipeDetailCard({ data }: RecipeDetailCardI) {
+export default function RecipeDetailCard({
+  data,
+  open,
+  onClose,
+}: RecipeDetailCardI) {
   const [showBefore, setShowBefore] = useState(false);
   const [showRecipe, setShowRecipe] = useState(false);
 
   return (
-    <article className="max-h-[80vh] overflow-y-auto">
-      <header>
-        <h3>{data.title}</h3>
-      </header>
-      <div className="relative w-full h-auto aspect-square">
-        {showRecipe && (
-          <div className="absolute inset-0 bg-black bg-opacity-70 z-10 flex items-center justify-center gap-2 p-4 flex-wrap text-white">
-            {data.recipe.map((item, idx) => (
-              <kbd key={idx}>
-                {item.property} : {item.value}
-              </kbd>
-            ))}
-          </div>
-        )}
-        {showBefore ? (
-          <Image
-            src={data.image.before}
-            alt=""
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        ) : (
-          <Image
-            src={data.image.after}
-            alt=""
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        )}
-      </div>
-      <footer>
+    <dialog open={open}>
+      <article className="">
+        <header className="flex justify-between items-center">
+          <h3>{data.title}</h3>
+          <XMarkIcon className="icon-button" onClick={onClose} />
+        </header>
+        <div className="relative aspect-square">
+          {showRecipe && (
+            <div className="absolute inset-0 bg-black bg-opacity-70 z-10 flex items-center justify-center gap-2 p-4 flex-wrap text-white">
+              {data.recipe.map((item, idx) => (
+                <kbd key={idx}>
+                  {item.property} : {item.value}
+                </kbd>
+              ))}
+            </div>
+          )}
+          {showBefore ? (
+            <Image
+              src={data.image.before}
+              alt=""
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          ) : (
+            <Image
+              src={data.image.after}
+              alt=""
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          )}
+        </div>
+        <hr />
         <b>
           #{data.category.main} #{data.category.sub}
         </b>
         &nbsp;
         {data.description}
-        <hr />
-        <nav>
+        <footer>
           <button onClick={() => setShowRecipe((cur) => !cur)}>
             {showRecipe ? (
               <>
@@ -88,8 +95,8 @@ export default function RecipeDetailCard({ data }: RecipeDetailCardI) {
           <button className="outline">
             <ShareIcon className="icon-in-button" />
           </button>
-        </nav>
-      </footer>
-    </article>
+        </footer>
+      </article>
+    </dialog>
   );
 }

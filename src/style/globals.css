@@ -24,7 +24,7 @@ input:not([type="checkbox"], [type="radio"]) {
 }
 
 .icon-in-button {
-  @apply size-8;
+  @apply size-5;
 }
 
 .icon-text {

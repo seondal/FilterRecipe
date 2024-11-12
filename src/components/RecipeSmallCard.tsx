@@ -16,11 +16,15 @@ export default function RecipeSmallCard({ data }: RecipeSmallCardI) {
   return (
     <>
       {isModal && (
-        <Modal onClose={() => setIsModal(false)}>
-          <RecipeDetailCard data={data} />
-        </Modal>
+        <RecipeDetailCard
+          data={data}
+          open={isModal}
+          onClose={() => setIsModal(false)}
+        />
       )}
-      <div className="flex flex-col w-[33%]" onClick={() => setIsModal(true)}>
+      <div
+        className="flex flex-col w-[33%] cursor-pointer"
+        onClick={() => setIsModal(true)}>
         <div className="flex flex-grow aspect-video">
           <div className="relative flex-1">
             <Image src={data.image.before} alt="" fill objectFit="cover" />
