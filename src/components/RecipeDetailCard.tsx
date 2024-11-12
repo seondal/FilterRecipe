@@ -12,6 +12,7 @@ import {
   SparklesIcon,
   XMarkIcon,
 } from "@heroicons/react/20/solid";
+import { BookmarkSlashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -30,8 +31,8 @@ export default function RecipeDetailCard({
   return (
     <dialog open={open}>
       <article className="">
-        <header className="flex justify-between items-center">
-          <h3>{data.title}</h3>
+        <header>
+          <h4>{data.title}</h4>
           <XMarkIcon className="icon-button" onClick={onClose} />
         </header>
         <div className="relative aspect-square">
@@ -78,19 +79,21 @@ export default function RecipeDetailCard({
               </>
             )}
           </button>
-          <button onClick={() => setShowBefore((cur) => !cur)}>
+          <button
+            onClick={() => setShowBefore((cur) => !cur)}
+            className="secondary">
             {showBefore ? (
               <>
-                <SparklesIcon className="icon-text" /> 보정 후
+                <SparklesIcon className="icon-text" /> 적용 후
               </>
             ) : (
               <>
-                <ArrowPathIcon className="icon-text" /> 보정 전
+                <ArrowPathIcon className="icon-text" /> 적용 전
               </>
             )}
           </button>
-          <button className="outline">
-            <BookmarkIcon className="icon-in-button" />
+          <button className="outline secondary">
+            <BookmarkSlashIcon className="icon-in-button" />
           </button>
           <button className="outline">
             <ShareIcon className="icon-in-button" />

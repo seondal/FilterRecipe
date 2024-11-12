@@ -4,6 +4,7 @@ import { CATEGORY } from "@/constants";
 import useURLSearchParams from "@/hooks/useURLSearchParams";
 import { ModalI } from "@/interface/component";
 import { ArrowPathIcon, CheckIcon } from "@heroicons/react/20/solid";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface CategoryI extends ModalI {}
 
@@ -32,6 +33,7 @@ export default function Category({ open, onClose }: CategoryI) {
       <article>
         <header>
           <h4>카테고리</h4>
+          <XMarkIcon className="icon-button" onClick={onClose} />
         </header>
         {CATEGORY.map((main) => (
           <div key={main.text} className="flex gap-4 mb-4">

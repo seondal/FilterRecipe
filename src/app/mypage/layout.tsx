@@ -1,5 +1,6 @@
 "use client";
 
+import { UserCircleIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -17,16 +18,16 @@ function Page({
 
   return (
     <div>
-      <section id="profile">
-        <Image src="/icon/home.svg" alt="" width={56} height={56} />
-        <div>skttttt@devocean.com</div>
-      </section>
+      <article id="profile">
+        <UserCircleIcon className="icon-button mr-4" />
+        <strong>skttttt@devocean.com</strong>
+      </article>
       <section id="navigation" role="search">
         {MYPAGE.map((item) => (
           <button
             onClick={() => router.replace(item.path)}
             key={item.path}
-            className={item.path === pathname ? "primary" : "secondary"}>
+            className={item.path === pathname ? "primary" : "outline"}>
             {item.text}
           </button>
         ))}
