@@ -3,7 +3,6 @@
 import { RecipeI } from "@/interface/recipe";
 import Image from "next/image";
 import { useState } from "react";
-import Modal from "./Modal";
 import RecipeDetailCard from "./RecipeDetailCard";
 
 interface RecipeSmallCardI {
