@@ -1,4 +1,4 @@
 export interface ModalI {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
