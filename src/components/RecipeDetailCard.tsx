@@ -1,5 +1,6 @@
 "use client";
 
+import { SITE } from "@/constants/env";
 import { ModalI } from "@/interface/component";
 import { RecipeI } from "@/interface/recipe";
 import { MockRecipe, MockRecipe2 } from "@/mock/mock_home";
@@ -27,6 +28,11 @@ export default function RecipeDetailCard({
 }: RecipeDetailCardI) {
   const [showBefore, setShowBefore] = useState(false);
   const [showRecipe, setShowRecipe] = useState(false);
+
+  function handleShare() {
+    navigator.clipboard.writeText(`${SITE}/recipe/${data.id}`);
+    alert("보정법을 공유할 수 있는 링크가 클립보드에 복사되었어요!");
+  }
 
   return (
     <dialog open={open}>
@@ -95,7 +101,7 @@ export default function RecipeDetailCard({
           <button className="outline secondary">
             <BookmarkSlashIcon className="icon-in-button" />
           </button>
-          <button className="outline">
+          <button className="outline" onClick={handleShare}>
             <ShareIcon className="icon-in-button" />
           </button>
         </footer>
