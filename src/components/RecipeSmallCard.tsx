@@ -20,10 +20,8 @@ export default function RecipeSmallCard({ data }: RecipeSmallCardI) {
           <RecipeDetailCard data={data} />
         </Modal>
       )}
-      <article
-        className="flex flex-col w-[33%] aspect-[1]"
-        onClick={() => setIsModal(true)}>
-        <div className="flex flex-grow">
+      <div className="flex flex-col w-[33%]" onClick={() => setIsModal(true)}>
+        <div className="flex flex-grow aspect-video">
           <div className="relative flex-1">
             <Image src={data.image.before} alt="" fill objectFit="cover" />
           </div>
@@ -31,8 +29,8 @@ export default function RecipeSmallCard({ data }: RecipeSmallCardI) {
             <Image src={data.image.after} alt="" fill objectFit="cover" />
           </div>
         </div>
-        <footer className="flex items-center h-16">{data.title}</footer>
-      </article>
+        <div className="p-2 h-16 overflow-hidden">{data.title}</div>
+      </div>
     </>
   );
 }
