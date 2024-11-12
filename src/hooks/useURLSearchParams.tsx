@@ -48,7 +48,11 @@ const useURLSearchParams = () => {
     return router.replace(`${pathname}?${newSearchParams.toString()}`);
   };
 
-  return { get, add, del, has };
+  const remove = () => {
+    return router.replace(`${pathname}`);
+  };
+
+  return { get, add, del, has, remove };
 };
 
 export default useURLSearchParams;

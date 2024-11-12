@@ -11,6 +11,14 @@ svg {
   cursor: pointer;
 }
 
+input {
+  margin-bottom: 0px;
+}
+
+input:not([type="checkbox"], [type="radio"]) {
+  margin-bottom: 0px;
+}
+
 .icon-button {
   @apply size-12 fill-[var(--pico-color)];
 }

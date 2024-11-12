@@ -5,6 +5,7 @@ import Category from "./Category";
 import { useSearchParams } from "next/navigation";
 import Feed from "./Feed";
 import Modal from "@/components/Modal";
+import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -18,8 +19,8 @@ export default function Page() {
 
   return (
     <>
-      <fieldset className="flex">
-        <form>
+      <fieldset className="flex gap-4">
+        <form className="flex flex-grow">
           <input
             name="search"
             type="search"
@@ -27,16 +28,12 @@ export default function Page() {
             defaultValue={keyword ?? ""}
           />
         </form>
-        <label>
-          <input
-            name="terms"
-            type="checkbox"
-            role="switch"
-            checked={categoryActive}
-            onChange={() => setCategoryActive((cur) => !cur)}
-          />
+        <button
+          className="outline"
+          onClick={() => setCategoryActive((cur) => !cur)}>
+          <AdjustmentsHorizontalIcon className="icon-text" />
           카테고리
-        </label>
+        </button>
       </fieldset>
       {categoryActive && (
         <Modal onClose={onClose} layout="bottom">
