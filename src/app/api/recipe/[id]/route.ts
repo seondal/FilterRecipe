@@ -14,7 +14,7 @@ export async function GET(
 
     if (!snap.exists()) {
       return NextResponse.json(
-        { error: "해당하는 아이디를 가진 레시피가 존재하지 않습니다" },
+        { error: "해당하는 아이디를 가진 레시피가 존재하지 않아요" },
         { status: 404 }
       );
     }
@@ -22,7 +22,7 @@ export async function GET(
     return NextResponse.json(snap.data());
   } catch (error) {
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "개발자에게 문의해주세요" },
       { status: 500 }
     );
   }
