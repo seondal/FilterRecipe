@@ -14,7 +14,7 @@ export async function GET(
 
     if (!snap.exists()) {
       return NextResponse.json(
-        { error: "경로의 레시피 아이디를 확인해주세요" },
+        { error: "해당하는 아이디를 가진 레시피가 존재하지 않습니다" },
         { status: 404 }
       );
     }
