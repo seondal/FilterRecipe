@@ -2,8 +2,8 @@
 
 import {
   ArrowUpTrayIcon,
-  BackspaceIcon,
   Bars3Icon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ export default function Header() {
       {isMain ? (
         <nav className="gap-4">
           <Link href="/upload">
-            <button>
+            <button className="h-10 flex items-center">
               <ArrowUpTrayIcon className="icon-text" />
               등록하기
             </button>
@@ -30,7 +30,7 @@ export default function Header() {
           />
         </nav>
       ) : (
-        <BackspaceIcon onClick={() => router.back()} className="size-12" />
+        <XMarkIcon onClick={() => router.back()} className="icon-button" />
       )}
     </nav>
   );

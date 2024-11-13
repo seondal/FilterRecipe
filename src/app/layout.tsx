@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="kor">
+    <html lang="kor" className="modal-is-opening">
       <head>
         <Script
           async
