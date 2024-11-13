@@ -25,7 +25,7 @@ export default function UploadPage() {
         />
       </label>
       <hr />
-      <fieldset className="flex *:flex-grow gap-4">
+      <fieldset className="flex *:flex-1 gap-4">
         <FileInput
           label="레시피 적용 전"
           setImage={setBeforeImage}
