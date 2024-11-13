@@ -10,11 +10,7 @@ import Header from "@/components/Header";
 
 export const metadata = META_DATA;
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: LayoutI) {
   return (
     <html lang="kor" className="modal-is-opening">
       <head>

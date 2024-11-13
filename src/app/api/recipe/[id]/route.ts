@@ -1,12 +1,8 @@
-// pages/api/users.js
 import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: NextRequest, { params }: ParamsWithIdI) {
   const ref = doc(db, "recipe", params.id);
 
   try {
