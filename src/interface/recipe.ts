@@ -19,10 +19,10 @@ export interface PropertiesI {
 export interface RecipeI {
   id: number;
   title: string;
-  source?: {
-    name: string;
-    url: string;
-  };
+  // source?: {
+  //   name: string;
+  //   url: string;
+  // };
   description?: string;
   image: {
     before: string;
