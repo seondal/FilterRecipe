@@ -8,10 +8,13 @@ const NO_SELECTION = "선택 안함";
 const ETC = "기타";
 
 export default function UploadPage() {
-  const [selectedMain, setSelectedMain] = useState(NO_SELECTION);
+  const [selectedMainCategory, setSelectedMainCategory] =
+    useState(NO_SELECTION);
+  const [beforeImage, setBeforeImage] = useState<File>();
+  const [afterImage, setAfterImage] = useState<File>();
 
   return (
-    <form encType="multipart/form-data">
+    <form encType="multipart/form-data" method="POST">
       <label>
         레시피 이름
         <input
@@ -23,8 +26,16 @@ export default function UploadPage() {
       </label>
       <hr />
       <fieldset className="flex *:flex-grow gap-4">
-        <FileInput label="레시피 적용 전" />{" "}
-        <FileInput label="레시피 적용 후" />
+        <FileInput
+          label="레시피 적용 전"
+          setImage={setBeforeImage}
+          id="beforeImage"
+        />
+        <FileInput
+          label="레시피 적용 후"
+          setImage={setAfterImage}
+          id="afterImage"
+        />
       </fieldset>
       <small>
         레시피기 적용되지 않았거나 부적절한 이미지는 삭제될 수 있어요
@@ -34,24 +45,24 @@ export default function UploadPage() {
         <fieldset className="flex">
           <select
             name="main"
-            value={selectedMain}
-            onChange={(e) => setSelectedMain(e.target.value)}>
+            value={selectedMainCategory}
+            onChange={(e) => setSelectedMainCategory(e.target.value)}>
             <option>{NO_SELECTION}</option>
             {CATEGORY.map((item) => (
               <option key={item.text}>{item.text}</option>
             ))}
             <option>{ETC}</option>
           </select>
-          {selectedMain === ETC ? (
+          {selectedMainCategory === ETC ? (
             <input name="sub" placeholder="카테고리를 입력해주세요" required />
           ) : (
-            selectedMain !== NO_SELECTION && (
+            selectedMainCategory !== NO_SELECTION && (
               <select name="sub">
-                {CATEGORY.find((main) => main.text === selectedMain)?.sub.map(
-                  (item) => (
-                    <option key={item}>{item}</option>
-                  )
-                )}
+                {CATEGORY.find(
+                  (main) => main.text === selectedMainCategory
+                )?.sub.map((item) => (
+                  <option key={item}>{item}</option>
+                ))}
               </select>
             )
           )}
@@ -79,7 +90,7 @@ export default function UploadPage() {
       <input
         type="submit"
         value="레시피 등록하기"
-        disabled={selectedMain === NO_SELECTION}
+        disabled={selectedMainCategory === NO_SELECTION}
       />
     </form>
   );
