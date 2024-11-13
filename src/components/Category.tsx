@@ -4,7 +4,6 @@ import { CATEGORY } from "@/constants";
 import useURLSearchParams from "@/hooks/useURLSearchParams";
 import { ModalI } from "@/interface/component";
 import { ArrowPathIcon, CheckIcon } from "@heroicons/react/20/solid";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface CategoryI extends ModalI {}
 
@@ -42,7 +41,7 @@ export default function Category({ open, onClose }: CategoryI) {
                 type="checkbox"
                 name="main"
                 onClick={() => handleSelectCategory(main.text)}
-                checked={isChecked(main.text)}
+                defaultChecked={isChecked(main.text)}
               />
               <strong>{main.text}</strong>
             </label>
@@ -53,7 +52,7 @@ export default function Category({ open, onClose }: CategoryI) {
                     type="checkbox"
                     name="sub"
                     onClick={() => handleSelectCategory(sub)}
-                    checked={isChecked(sub)}
+                    defaultChecked={isChecked(sub)}
                   />
                   {sub}
                 </label>

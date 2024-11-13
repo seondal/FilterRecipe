@@ -26,10 +26,20 @@ export default function RecipeSmallCard({ data }: RecipeSmallCardI) {
         onClick={() => setIsModal(true)}>
         <div className="flex flex-grow aspect-video">
           <div className="relative flex-1">
-            <Image src={data.image.before} alt="" fill objectFit="cover" />
+            <Image
+              src={data.image.before}
+              alt=""
+              fill
+              style={{ objectFit: "cover" }}
+            />
           </div>
           <div className="relative flex-1">
-            <Image src={data.image.after} alt="" fill objectFit="cover" />
+            <Image
+              src={data.image.after}
+              alt=""
+              fill
+              style={{ objectFit: "cover" }}
+            />
           </div>
         </div>
         <div className="p-2 h-16 overflow-hidden">{data.title}</div>
