@@ -40,6 +40,10 @@ export default function RecipeDetailCard({
     return onClose();
   }
 
+  function handleBookmark() {
+    alert("해당 기능은 아직 준비중이에요. 업데이트를 기다려주세요");
+  }
+
   return (
     <dialog open={open}>
       <article className="">
@@ -104,7 +108,7 @@ export default function RecipeDetailCard({
               </>
             )}
           </button>
-          <button className="outline secondary">
+          <button className="outline secondary" onClick={handleBookmark}>
             <BookmarkSlashIcon className="icon-in-button" />
           </button>
           <button className="outline" onClick={handleShare}>
