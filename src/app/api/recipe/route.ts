@@ -1,6 +1,4 @@
 import { db } from "@/firebase";
-import { PostRecipeRequestI } from "@/interface/server";
-import axios from "axios";
 import {
   collection,
   doc,
@@ -9,6 +7,8 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
+import { myApi } from "../instance";
+import { RecipeI } from "@/interface/recipe";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   const recipeSnapshot = await getDocs(collection(db, "recipe"));
@@ -21,24 +21,46 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const body = await req.formData();
 
   // 보정 전 이미지 업로드
-  const formDataForBefore = new FormData();
-  const beforeImage = body.get("beforeImage") as File;
-  formDataForBefore.append("image", beforeImage);
-  const beforeImagebbRes = await axios.post(`/api/imgbb`, formDataForBefore);
-  const beforeImagebbData = beforeImagebbRes.data;
-  console.log("🚀 ~ POST ~ beforeImagebbData:", beforeImagebbData);
+  const beforeImgbbRes = await myApi.post(`/imgbb/beforeImage`, body);
+  const beforeImgData = beforeImgbbRes.data;
 
   // 보정 후 이미지 업로드
-  const formDataForAfter = new FormData();
-  const afterImage = body.get("afterImage") as File;
-  formDataForAfter.append("image", afterImage);
-  const afterImagebbRes = await axios.post(`/api/imgbb`, formDataForAfter);
-  const afterImagebbData = afterImagebbRes.data;
-  console.log("🚀 ~ POST ~ afterImagebbData:", afterImagebbData);
+  const afterImgbbRes = await myApi.post(`/imgbb/afterImage`, body);
+  const afterImgData = afterImgbbRes.data;
 
-  // const newRef = doc(collection(db, "recipe"));
-  // const newDoc = { id: newRef.id, ...data, timestamp: serverTimestamp() };
-  // await setDoc(newRef, newDoc);
+  const data: RecipeI = {
+    title: body.get("title") as string,
+    image: {
+      before: beforeImgData.url,
+      after: afterImgData.url,
+    },
+    category: {
+      main: body.get("mainCategory") as string,
+      sub: body.get("subCategory") as string,
+    },
+    description: body.get("description") as string,
+    property: {
+      exposure: parseInt(body.get("exposure") as string),
+      brightness: parseFloat(body.get("brightness") as string),
+      highlight: parseFloat(body.get("highlight") as string),
+      shadow: parseFloat(body.get("shadow") as string),
+      contrast: parseFloat(body.get("contrast") as string),
+      lightness: parseFloat(body.get("lightness") as string),
+      blackPoint: parseFloat(body.get("blackPoint") as string),
+      saturation: parseFloat(body.get("saturation") as string),
+      colorClarity: parseFloat(body.get("colorClarity") as string),
+      warmth: parseFloat(body.get("warmth") as string),
+      hue: parseFloat(body.get("hue") as string),
+      sharpness: parseFloat(body.get("sharpness") as string),
+      clarity: parseFloat(body.get("clarity") as string),
+      noiseReduction: parseFloat(body.get("noiseReduction") as string),
+      vignette: parseFloat(body.get("vignette") as string),
+    },
+  };
 
-  return NextResponse.json({});
+  const newRef = doc(collection(db, "recipe"));
+  const newDoc = { id: newRef.id, ...data, timestamp: serverTimestamp() };
+  await setDoc(newRef, newDoc);
+
+  return NextResponse.json(newDoc);
 }

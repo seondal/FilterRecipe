@@ -17,12 +17,7 @@ export interface PropertiesI {
 }
 
 export interface RecipeI {
-  id: number;
   title: string;
-  // source?: {
-  //   name: string;
-  //   url: string;
-  // };
   description?: string;
   image: {
     before: string;
@@ -32,6 +27,5 @@ export interface RecipeI {
     main: string;
     sub: string;
   };
-  // property: PropertiesI;
-  recipe: { property: string; value: number }[];
+  property: PropertiesI;
 }

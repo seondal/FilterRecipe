@@ -44,7 +44,7 @@ export default function UploadPage() {
         카테고리
         <fieldset className="flex">
           <select
-            name="main"
+            name="mainCategory"
             value={selectedMainCategory}
             onChange={(e) => setSelectedMainCategory(e.target.value)}>
             <option>{NO_SELECTION}</option>
@@ -54,7 +54,11 @@ export default function UploadPage() {
             <option>{ETC}</option>
           </select>
           {selectedMainCategory === ETC ? (
-            <input name="sub" placeholder="카테고리를 입력해주세요" required />
+            <input
+              name="subCategory"
+              placeholder="카테고리를 입력해주세요"
+              required
+            />
           ) : (
             selectedMainCategory !== NO_SELECTION && (
               <select name="sub">
