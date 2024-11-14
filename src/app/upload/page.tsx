@@ -2,7 +2,8 @@
 
 import FileInput from "@/components/FileInput";
 import { CATEGORY, PROPERTIES } from "@/constants";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { myApi } from "../api/instance";
 
 const NO_SELECTION = "선택 안함";
 const ETC = "기타";
@@ -13,10 +14,27 @@ export default function UploadPage() {
   const [beforeImage, setBeforeImage] = useState<File>();
   const [afterImage, setAfterImage] = useState<File>();
 
+  const isSubmitActive =
+    beforeImage !== null &&
+    afterImage !== null &&
+    selectedMainCategory !== NO_SELECTION;
+
+  async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const response = await myApi.post("recipe", e.target, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(response);
+  }
+
   return (
-    <form encType="multipart/form-data" method="POST" action="/api/recipe">
+    <form onSubmit={handleSubmit}>
       <label>
-        레시피 이름
+        *레시피 이름
         <input
           maxLength={20}
           name="title"
@@ -41,7 +59,7 @@ export default function UploadPage() {
         레시피기 적용되지 않았거나 부적절한 이미지는 삭제될 수 있어요
       </small>
       <label>
-        카테고리
+        *카테고리
         <fieldset className="flex">
           <select
             name="mainCategory"
@@ -91,11 +109,7 @@ export default function UploadPage() {
       <label>
         설명 <textarea maxLength={300} name="description" />
       </label>
-      <input
-        type="submit"
-        value="레시피 등록하기"
-        disabled={selectedMainCategory === NO_SELECTION}
-      />
+      <input type="submit" value="레시피 등록하기" disabled={!isSubmitActive} />
     </form>
   );
 }
