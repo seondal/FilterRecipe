@@ -41,7 +41,7 @@ export default function Category({ open, onClose }: CategoryI) {
                 type="checkbox"
                 name="main"
                 onClick={() => handleSelectCategory(main.text)}
-                defaultChecked={isChecked(main.text)}
+                checked={isChecked(main.text)}
               />
               <strong>{main.text}</strong>
             </label>
@@ -52,7 +52,7 @@ export default function Category({ open, onClose }: CategoryI) {
                     type="checkbox"
                     name="sub"
                     onClick={() => handleSelectCategory(sub)}
-                    defaultChecked={isChecked(sub)}
+                    checked={isChecked(sub)}
                   />
                   {sub}
                 </label>
