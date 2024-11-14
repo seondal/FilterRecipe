@@ -30,7 +30,7 @@ export default function RecipeDetailCard({
 
   function handleShare() {
     navigator.clipboard.writeText(`${SITE}/recipe/${data.id}`);
-    alert("보정법을 공유할 수 있는 링크가 클립보드에 복사되었어요!");
+    alert("레시피를 공유할 수 있는 링크가 클립보드에 복사되었어요!");
   }
 
   function handleClose() {
