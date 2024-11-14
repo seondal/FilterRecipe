@@ -22,7 +22,7 @@ export default function Feed() {
 
   return (
     <>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-y-3 gap-x-1">
         {data.map((item, idx) => (
           <RecipeSmallCard data={RecipeDataForCard(item)} key={idx} />
         ))}
