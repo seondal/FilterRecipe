@@ -15,13 +15,13 @@ export default function Header() {
 
   return (
     <nav className="px-4 items-center">
-      <h1 style={{ marginBottom: "0px" }}>Filter Recipe</h1>
+      <h2 style={{ marginBottom: "0px" }}>Filter Recipe</h2>
       {isMain ? (
         <nav className="gap-4">
           <Link href="/upload">
             <button className="h-10 flex items-center">
               <ArrowUpTrayIcon className="icon-text" />
-              등록하기
+              레시피 등록
             </button>
           </Link>
           <Bars3Icon
