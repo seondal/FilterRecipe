@@ -2,7 +2,7 @@
 
 import FileInput from "@/components/FileInput";
 import { CATEGORY, PROPERTIES } from "@/constants";
-import { FormEvent, KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useState } from "react";
 
 const NO_SELECTION = "선택 안함";
 const ETC = "기타";
@@ -18,17 +18,31 @@ export default function UploadPage() {
     afterImage !== null &&
     selectedMainCategory !== NO_SELECTION;
 
-  function handleKeyDown(event: KeyboardEvent<HTMLFormElement>) {
+  function handleKeyDownOnForm(event: KeyboardEvent<HTMLFormElement>) {
     if (event.key === "Enter") {
       event.preventDefault();
     }
   }
+
+  function handleKeyDownInInput(event: KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+
+      const form = event.currentTarget.form as HTMLFormElement;
+      const index = Array.from(form.elements).indexOf(event.currentTarget);
+
+      if (form.elements[index + 1]) {
+        (form.elements[index + 1] as HTMLElement).focus();
+      }
+    }
+  }
+
   return (
     <form
       encType="multipart/form-data"
       method="POST"
       action="/api/recipe"
-      onKeyDown={handleKeyDown}>
+      onKeyDown={handleKeyDownOnForm}>
       <label>
         *레시피 이름
         <input
@@ -98,6 +112,8 @@ export default function UploadPage() {
               min={item.min}
               maxLength={3}
               defaultValue={0}
+              onKeyDown={handleKeyDownInInput}
+              onFocus={(e) => (e.target.value = "")}
             />
           </label>
         ))}
