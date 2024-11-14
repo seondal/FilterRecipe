@@ -1,6 +1,5 @@
 "use client";
 
-import { RecipeI } from "@/interface/recipe";
 import Image from "next/image";
 import { useState } from "react";
 import RecipeDetailCard from "./RecipeDetailCard";

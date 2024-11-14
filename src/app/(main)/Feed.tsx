@@ -1,5 +1,4 @@
 import RecipeSmallCard from "@/components/RecipeSmallCard";
-import { MockHome } from "@/mock/mock_home";
 import { myApi } from "../api/instance";
 import { RecipeI } from "@/interface/recipe";
 import { RecipeDataForCard } from "@/utils/transform";
