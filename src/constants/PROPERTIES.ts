@@ -1,4 +1,13 @@
-const PROPERTIES = [
+import { PropertiesI } from "@/interface/recipe";
+
+interface PropertyI {
+  name: string;
+  min: number;
+  max: number;
+  key: keyof PropertiesI;
+}
+
+const PROPERTIES: Array<PropertyI> = [
   { name: "노출", min: -100, max: 100, key: "exposure" },
   { name: "휘도", min: -100, max: 100, key: "brightness" },
   { name: "하이라이트", min: -100, max: 100, key: "highlight" },

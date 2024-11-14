@@ -29,7 +29,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const afterImgbbRes = await myApi.post(`/imgbb/afterImage`, body);
   const afterImgData = afterImgbbRes.data;
 
-  const data: RecipeI = {
+  const data = {
     title: body.get("title") as string,
     image: {
       before: beforeImgData.url,
@@ -60,7 +60,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
   };
 
   const newRef = doc(collection(db, "recipe"));
-  const newDoc = { id: newRef.id, ...data, timestamp: serverTimestamp() };
+  const newDoc: RecipeI = {
+    id: newRef.id,
+    ...data,
+    timestamp: serverTimestamp(),
+  };
   await setDoc(newRef, newDoc);
 
   const redirectUrl = `${SITE}/recipe/${newRef.id}`;

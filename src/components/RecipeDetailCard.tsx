@@ -2,7 +2,6 @@
 
 import { SITE } from "@/constants/env";
 import { ModalI, RecipeCardDataI } from "@/interface/component";
-import { RecipeI } from "@/interface/recipe";
 import {
   ArrowPathIcon,
   EyeIcon,
@@ -12,7 +11,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { BookmarkSlashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface RecipeDetailCardI extends ModalI {
