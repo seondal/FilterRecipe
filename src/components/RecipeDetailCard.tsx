@@ -37,7 +37,7 @@ export default function RecipeDetailCard({
     if (onClose === undefined) {
       return router.push("/");
     }
-    return onClose;
+    return onClose();
   }
 
   return (
