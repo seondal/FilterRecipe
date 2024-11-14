@@ -2,6 +2,7 @@ import { db } from "@/firebase";
 import {
   collection,
   doc,
+  DocumentData,
   getDocs,
   or,
   query,
@@ -36,8 +37,19 @@ export async function GET(req: NextRequest, res: NextResponse) {
   }
 
   const snapshot = await getDocs(q);
-  const results = snapshot.docs.map((doc) => doc.data());
 
+  if (keyword) {
+    const filteredDocs: DocumentData[] = [];
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      if (data.description && data.description.includes(keyword)) {
+        filteredDocs.push(data);
+      }
+    });
+    return NextResponse.json(filteredDocs);
+  }
+
+  const results = snapshot.docs.map((doc) => doc.data());
   return NextResponse.json(results);
 }
 
