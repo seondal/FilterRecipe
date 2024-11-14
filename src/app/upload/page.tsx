@@ -14,7 +14,7 @@ export default function UploadPage() {
   const [afterImage, setAfterImage] = useState<File>();
 
   return (
-    <form encType="multipart/form-data" method="POST">
+    <form encType="multipart/form-data" method="POST" action="/api/recipe">
       <label>
         레시피 이름
         <input
