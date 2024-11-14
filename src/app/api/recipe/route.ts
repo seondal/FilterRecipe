@@ -3,18 +3,40 @@ import {
   collection,
   doc,
   getDocs,
+  or,
+  query,
   serverTimestamp,
   setDoc,
+  where,
 } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
-import { imgbbAPI, myApi } from "../instance";
+import { imgbbAPI } from "../instance";
 import { RecipeI } from "@/interface/recipe";
 import { SITE } from "@/constants/env";
 
 /** GET Recipe */
 export async function GET(req: NextRequest, res: NextResponse) {
-  const recipeSnapshot = await getDocs(collection(db, "recipe"));
-  const results = recipeSnapshot.docs.map((doc) => doc.data());
+  const searchParams = req.nextUrl.searchParams;
+  const category = searchParams.get("category");
+  const keyword = searchParams.get("keyword");
+
+  const ref = collection(db, "recipe");
+
+  let q = query(ref);
+  if (category) {
+    const categoryArray = category.split(",");
+    console.log("🚀 ~ GET ~ categoryArray:", categoryArray);
+    q = query(
+      ref,
+      or(
+        where("category.main", "in", categoryArray),
+        where("category.sub", "in", categoryArray)
+      )
+    );
+  }
+
+  const snapshot = await getDocs(q);
+  const results = snapshot.docs.map((doc) => doc.data());
 
   return NextResponse.json(results);
 }
