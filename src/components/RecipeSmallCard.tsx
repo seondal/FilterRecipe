@@ -4,9 +4,10 @@ import { RecipeI } from "@/interface/recipe";
 import Image from "next/image";
 import { useState } from "react";
 import RecipeDetailCard from "./RecipeDetailCard";
+import { RecipeCardDataI } from "@/interface/component";
 
 interface RecipeSmallCardI {
-  data: RecipeI;
+  data: RecipeCardDataI;
 }
 
 export default function RecipeSmallCard({ data }: RecipeSmallCardI) {

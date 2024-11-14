@@ -1,7 +1,7 @@
 "use client";
 
 import { SITE } from "@/constants/env";
-import { ModalI } from "@/interface/component";
+import { ModalI, RecipeCardDataI } from "@/interface/component";
 import { RecipeI } from "@/interface/recipe";
 import {
   ArrowPathIcon,
@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 interface RecipeDetailCardI extends ModalI {
-  data: RecipeI;
+  data: RecipeCardDataI;
 }
 
 export default function RecipeDetailCard({
