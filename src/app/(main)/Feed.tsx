@@ -1,16 +1,19 @@
 import RecipeSmallCard from "@/components/RecipeSmallCard";
-import { MockHome, MockRecipe, MockRecipe2 } from "@/mock/mock_home";
+import { myApi } from "../api/instance";
+import { RecipeI } from "@/interface/recipe";
+import { RecipeDataForCard } from "@/utils/transform";
 
-export default function Feed() {
+export default async function Feed() {
+  const res = await myApi.get<RecipeI[]>("/recipe");
+  const data = res.data;
+
   return (
     <>
-      <h4>인기 레시피</h4>
-      <div className="flex flex-wrap justify-center">
-        {MockHome.map((item, idx) => (
-          <RecipeSmallCard data={item} key={idx} />
+      <div className="flex flex-wrap gap-3">
+        {data.map((item, idx) => (
+          <RecipeSmallCard data={RecipeDataForCard(item)} key={idx} />
         ))}
       </div>
-      <h4>최근 추가된 레시피</h4>
     </>
   );
 }

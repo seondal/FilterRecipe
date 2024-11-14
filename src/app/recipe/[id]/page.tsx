@@ -1,23 +1,17 @@
-"use client";
-
+import { myApi } from "@/app/api/instance";
 import RecipeDetailCard from "@/components/RecipeDetailCard";
-import { MockRecipe } from "@/mock/mock_home";
-import { useRouter } from "next/navigation";
+import { RecipeI } from "@/interface/recipe";
+import { RecipeDataForCard } from "@/utils/transform";
 
-interface RecipePageI {
-  params: { id: number };
-}
+export default async function RecipePage({ params }: ParamsWithIdI) {
+  const res = await myApi.get<RecipeI>(`/recipe/${params.id}`);
+  const data = res.data;
 
-export default function RecipePage({ params }: RecipePageI) {
-  const router = useRouter();
-  const id = params.id;
-  const data = MockRecipe;
+  const cardData = RecipeDataForCard(data);
 
   return (
-    <RecipeDetailCard
-      data={data}
-      open={true}
-      onClose={() => router.push("/")}
-    />
+    <div>
+      <RecipeDetailCard data={cardData} open={true} />
+    </div>
   );
 }

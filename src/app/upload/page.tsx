@@ -2,7 +2,7 @@
 
 import FileInput from "@/components/FileInput";
 import { CATEGORY, PROPERTIES } from "@/constants";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 const NO_SELECTION = "선택 안함";
 const ETC = "기타";
@@ -13,10 +13,15 @@ export default function UploadPage() {
   const [beforeImage, setBeforeImage] = useState<File>();
   const [afterImage, setAfterImage] = useState<File>();
 
+  const isSubmitActive =
+    beforeImage !== null &&
+    afterImage !== null &&
+    selectedMainCategory !== NO_SELECTION;
+
   return (
-    <form encType="multipart/form-data" method="POST">
+    <form encType="multipart/form-data" method="POST" action="/api/recipe">
       <label>
-        레시피 이름
+        *레시피 이름
         <input
           maxLength={20}
           name="title"
@@ -41,10 +46,10 @@ export default function UploadPage() {
         레시피기 적용되지 않았거나 부적절한 이미지는 삭제될 수 있어요
       </small>
       <label>
-        카테고리
+        *카테고리
         <fieldset className="flex">
           <select
-            name="main"
+            name="mainCategory"
             value={selectedMainCategory}
             onChange={(e) => setSelectedMainCategory(e.target.value)}>
             <option>{NO_SELECTION}</option>
@@ -54,10 +59,14 @@ export default function UploadPage() {
             <option>{ETC}</option>
           </select>
           {selectedMainCategory === ETC ? (
-            <input name="sub" placeholder="카테고리를 입력해주세요" required />
+            <input
+              name="subCategory"
+              placeholder="카테고리를 입력해주세요"
+              required
+            />
           ) : (
             selectedMainCategory !== NO_SELECTION && (
-              <select name="sub">
+              <select name="subCategory">
                 {CATEGORY.find(
                   (main) => main.text === selectedMainCategory
                 )?.sub.map((item) => (
@@ -87,11 +96,7 @@ export default function UploadPage() {
       <label>
         설명 <textarea maxLength={300} name="description" />
       </label>
-      <input
-        type="submit"
-        value="레시피 등록하기"
-        disabled={selectedMainCategory === NO_SELECTION}
-      />
+      <input type="submit" value="레시피 등록하기" disabled={!isSubmitActive} />
     </form>
   );
 }

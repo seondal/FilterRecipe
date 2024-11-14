@@ -12,6 +12,7 @@ const config: Config = {
         primary: "var(--pico-primary-background)",
         secondary: "var(--pico-secondary-background)",
         default: "var(--pico-color)",
+        card: "var(--pico-card-background-color)",
       },
       backgroundColor: {
         default: "var(--pico-background-color)",

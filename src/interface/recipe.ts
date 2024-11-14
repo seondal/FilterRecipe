@@ -1,3 +1,5 @@
+import { FieldValue } from "firebase/firestore";
+
 export interface PropertiesI {
   exposure: number;
   brightness: number;
@@ -17,12 +19,8 @@ export interface PropertiesI {
 }
 
 export interface RecipeI {
-  id: number;
+  id: string;
   title: string;
-  source?: {
-    name: string;
-    url: string;
-  };
   description?: string;
   image: {
     before: string;
@@ -32,6 +30,6 @@ export interface RecipeI {
     main: string;
     sub: string;
   };
-  // property: PropertiesI;
-  recipe: { property: string; value: number }[];
+  property: PropertiesI;
+  timestamp: FieldValue;
 }
