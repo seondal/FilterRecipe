@@ -24,13 +24,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const body = await req.formData();
 
-    // 이미지 업로드
-    const [beforeImgbbRes, afterImgbbRes] = await Promise.all([
-      myApi.post(`/imgbb/beforeImage`, body),
-      myApi.post(`/imgbb/afterImage`, body),
-    ]);
-
+    // 보정 전 이미지 업로드
+    const beforeImgbbRes = await myApi.post(`/imgbb/beforeImage`, body);
     const beforeImgData = beforeImgbbRes.data;
+
+    // 보정 후 이미지 업로드
+    const afterImgbbRes = await myApi.post(`/imgbb/afterImage`, body);
     const afterImgData = afterImgbbRes.data;
 
     const data = {
@@ -75,6 +74,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     return NextResponse.redirect(redirectUrl);
   } catch (error) {
     console.log(error);
-    return NextResponse.redirect("/");
+    return NextResponse.redirect(SITE);
   }
 }
