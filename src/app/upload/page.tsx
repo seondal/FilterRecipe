@@ -114,6 +114,11 @@ export default function UploadPage() {
               defaultValue={0}
               onKeyDown={handleKeyDownInInput}
               onFocus={(e) => (e.target.value = "")}
+              onBlur={(e) => {
+                if (e.target.value === "") {
+                  e.target.value = "0";
+                }
+              }}
             />
           </label>
         ))}
