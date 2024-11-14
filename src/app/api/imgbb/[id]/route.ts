@@ -10,13 +10,9 @@ export async function POST(req: NextRequest, { params }: ParamsWithIdI) {
 
   const res = await imgbbAPI.post("/1/upload", formData, {
     params: { name: params.id },
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
   });
 
   const data = res.data.data;
-
   const result = { url: data.url };
 
   return NextResponse.json(result);
