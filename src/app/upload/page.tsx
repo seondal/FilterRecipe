@@ -2,7 +2,7 @@
 
 import FileInput from "@/components/FileInput";
 import { CATEGORY, PROPERTIES } from "@/constants";
-import { ChangeEvent, useState } from "react";
+import { FormEvent, KeyboardEvent, useState } from "react";
 
 const NO_SELECTION = "선택 안함";
 const ETC = "기타";
@@ -18,8 +18,17 @@ export default function UploadPage() {
     afterImage !== null &&
     selectedMainCategory !== NO_SELECTION;
 
+  function handleKeyDown(event: KeyboardEvent<HTMLFormElement>) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  }
   return (
-    <form encType="multipart/form-data" method="POST" action="/api/recipe">
+    <form
+      encType="multipart/form-data"
+      method="POST"
+      action="/api/recipe"
+      onKeyDown={handleKeyDown}>
       <label>
         *레시피 이름
         <input
