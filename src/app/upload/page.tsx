@@ -3,7 +3,6 @@
 import FileInput from "@/components/FileInput";
 import { CATEGORY, PROPERTIES } from "@/constants";
 import { ChangeEvent, useState } from "react";
-import { myApi } from "../api/instance";
 
 const NO_SELECTION = "선택 안함";
 const ETC = "기타";
@@ -19,20 +18,8 @@ export default function UploadPage() {
     afterImage !== null &&
     selectedMainCategory !== NO_SELECTION;
 
-  async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const response = await myApi.post("recipe", e.target, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    console.log(response);
-  }
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form encType="multipart/form-data" method="POST" action="/api/recipe">
       <label>
         *레시피 이름
         <input
@@ -79,7 +66,7 @@ export default function UploadPage() {
             />
           ) : (
             selectedMainCategory !== NO_SELECTION && (
-              <select name="sub">
+              <select name="subCategory">
                 {CATEGORY.find(
                   (main) => main.text === selectedMainCategory
                 )?.sub.map((item) => (

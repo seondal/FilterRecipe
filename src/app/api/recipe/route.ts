@@ -9,6 +9,7 @@ import {
 import { NextRequest, NextResponse } from "next/server";
 import { myApi } from "../instance";
 import { RecipeI } from "@/interface/recipe";
+import { SITE } from "@/constants/env";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   const recipeSnapshot = await getDocs(collection(db, "recipe"));
@@ -62,5 +63,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const newDoc = { id: newRef.id, ...data, timestamp: serverTimestamp() };
   await setDoc(newRef, newDoc);
 
-  return NextResponse.json(newDoc);
+  const redirectUrl = `${SITE}/recipe/${newRef.id}`;
+  return NextResponse.redirect(redirectUrl);
 }
