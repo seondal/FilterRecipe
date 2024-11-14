@@ -7,7 +7,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
-import { myApi } from "../instance";
+import { imgbbAPI, myApi } from "../instance";
 import { RecipeI } from "@/interface/recipe";
 import { SITE } from "@/constants/env";
 
@@ -25,18 +25,28 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const body = await req.formData();
 
     // 보정 전 이미지 업로드
-    const beforeImgbbRes = await myApi.post(`/imgbb/beforeImage`, body);
+    const formData1 = new FormData();
+    const file1 = body.get("beforeImage") as File;
+    formData1.append("image", file1);
+    const beforeImgbbRes = await imgbbAPI.post("/1/upload", formData1, {
+      params: { name: "beforeImage" },
+    });
     const beforeImgData = beforeImgbbRes.data;
 
     // 보정 후 이미지 업로드
-    const afterImgbbRes = await myApi.post(`/imgbb/afterImage`, body);
-    const afterImgData = afterImgbbRes.data;
+    const formData2 = new FormData();
+    const file2 = body.get("beforeImage") as File;
+    formData2.append("image", file2);
+    const afterImageRes = await imgbbAPI.post("/1/upload", formData2, {
+      params: { name: "beforeImage" },
+    });
+    const afterImgData = afterImageRes.data;
 
     const data = {
       title: body.get("title") as string,
       image: {
-        before: beforeImgData.url,
-        after: afterImgData.url,
+        before: beforeImgData.data.url,
+        after: afterImgData.data.url,
       },
       category: {
         main: body.get("mainCategory") as string,
