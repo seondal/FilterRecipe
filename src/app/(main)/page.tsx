@@ -25,7 +25,7 @@ export default function Page() {
   useEffect(() => {
     fetchFeed();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category]);
+  }, [category, keyword, userid]);
 
   if (!data) {
     return <div aria-busy="true" />;
