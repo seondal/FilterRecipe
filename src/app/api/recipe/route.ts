@@ -69,10 +69,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     // 보정 후 이미지 업로드
     const formData2 = new FormData();
-    const file2 = body.get("beforeImage") as File;
+    const file2 = body.get("afterImage") as File;
     formData2.append("image", file2);
     const afterImageRes = await imgbbAPI.post("/1/upload", formData2, {
-      params: { name: "beforeImage" },
+      params: { name: "afterImage" },
     });
     const afterImgData = afterImageRes.data;
 
