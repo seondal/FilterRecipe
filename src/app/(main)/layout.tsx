@@ -6,8 +6,8 @@ export default function Layout({ children }: LayoutI) {
     <>
       <Suspense>
         <SearchBar />
+        {children}
       </Suspense>
-      {children}
     </>
   );
 }
