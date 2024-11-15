@@ -14,6 +14,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { imgbbAPI } from "../instance";
 import { RecipeI } from "@/interface/recipe";
 import { SITE } from "@/constants/env";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 /** GET Recipe */
 export async function GET(req: NextRequest, res: NextResponse) {
@@ -24,6 +26,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   const ref = collection(db, "recipe");
 
   let q = query(ref);
+
   if (category) {
     const categoryArray = category.split(",");
     console.log("🚀 ~ GET ~ categoryArray:", categoryArray);
@@ -55,6 +58,15 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 /** POST Recipe */
 export async function POST(req: NextRequest, res: NextResponse) {
+  const searchParams = req.nextUrl.searchParams;
+  const userid = searchParams.get("userid");
+  if (!userid || userid === "") {
+    return NextResponse.json(
+      { error: "업로드는 로그인 후 가능해요" },
+      { status: 401 }
+    );
+  }
+
   try {
     const body = await req.formData();
 
@@ -77,6 +89,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const afterImgData = afterImageRes.data;
 
     const data = {
+      userId: userid,
       title: body.get("title") as string,
       image: {
         before: beforeImgData.data.url,
