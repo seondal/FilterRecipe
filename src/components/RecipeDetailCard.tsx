@@ -1,24 +1,21 @@
 "use client";
 
 import { SITE } from "@/constants/env";
-import { ModalI } from "@/interface/component";
-import { RecipeI } from "@/interface/recipe";
-import { MockRecipe, MockRecipe2 } from "@/mock/mock_home";
+import { ModalI, RecipeCardDataI } from "@/interface/component";
 import {
   ArrowPathIcon,
-  BookmarkIcon,
   EyeIcon,
   EyeSlashIcon,
   ShareIcon,
   SparklesIcon,
-  XMarkIcon,
 } from "@heroicons/react/20/solid";
 import { BookmarkSlashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface RecipeDetailCardI extends ModalI {
-  data: RecipeI;
+  data: RecipeCardDataI;
 }
 
 export default function RecipeDetailCard({
@@ -26,19 +23,32 @@ export default function RecipeDetailCard({
   open,
   onClose,
 }: RecipeDetailCardI) {
+  const router = useRouter();
+
   const [showBefore, setShowBefore] = useState(false);
   const [showRecipe, setShowRecipe] = useState(false);
 
   function handleShare() {
     navigator.clipboard.writeText(`${SITE}/recipe/${data.id}`);
-    alert("보정법을 공유할 수 있는 링크가 클립보드에 복사되었어요!");
+    alert("레시피를 공유할 수 있는 링크가 클립보드에 복사되었어요!");
+  }
+
+  function handleClose() {
+    if (onClose === undefined) {
+      return router.push("/");
+    }
+    return onClose();
+  }
+
+  function handleBookmark() {
+    alert("해당 기능은 아직 준비중이에요. 업데이트를 기다려주세요");
   }
 
   return (
     <dialog open={open}>
       <article className="">
         <header>
-          <button aria-label="Close" rel="prev" onClick={onClose}></button>
+          <button aria-label="Close" rel="prev" onClick={handleClose}></button>
           <h4>{data.title}</h4>
         </header>
         <div className="relative aspect-square">
@@ -98,7 +108,7 @@ export default function RecipeDetailCard({
               </>
             )}
           </button>
-          <button className="outline secondary">
+          <button className="outline secondary" onClick={handleBookmark}>
             <BookmarkSlashIcon className="icon-in-button" />
           </button>
           <button className="outline" onClick={handleShare}>

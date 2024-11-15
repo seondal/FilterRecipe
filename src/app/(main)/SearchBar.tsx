@@ -7,7 +7,7 @@ import Category from "@/components/Category";
 
 export default function SearchBar() {
   const searchParams = useSearchParams();
-  const keywordQuery = searchParams.get("search");
+  const keywordQuery = searchParams.get("keyword");
   const categoryQuery = searchParams.get("category");
 
   const [categoryActive, setCategoryActive] = useState(false);
@@ -21,7 +21,7 @@ export default function SearchBar() {
       <fieldset className="flex gap-4">
         <form className="flex flex-grow">
           <input
-            name="search"
+            name="keyword"
             type="search"
             placeholder="키워드로 검색하기"
             defaultValue={keywordQuery ?? ""}

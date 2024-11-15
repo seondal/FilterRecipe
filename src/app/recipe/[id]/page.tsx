@@ -1,23 +1,29 @@
 "use client";
 
+import { myApi } from "@/app/api/instance";
 import RecipeDetailCard from "@/components/RecipeDetailCard";
-import { MockRecipe } from "@/mock/mock_home";
-import { useRouter } from "next/navigation";
+import { RecipeI } from "@/interface/recipe";
+import { RecipeDataForCard } from "@/utils/transform";
+import { useEffect, useState } from "react";
 
-interface RecipePageI {
-  params: { id: number };
-}
+export default function RecipePage({ params }: ParamsWithIdI) {
+  const [data, setData] = useState<RecipeI>();
 
-export default function RecipePage({ params }: RecipePageI) {
-  const router = useRouter();
-  const id = params.id;
-  const data = MockRecipe;
+  async function fetchFeed() {
+    const res = await myApi.get<RecipeI>(`/recipe/${params.id}`);
+    setData(res.data);
+  }
 
+  useEffect(() => {
+    fetchFeed();
+  }, []);
+
+  if (!data) return <div aria-busy="true" />;
+
+  const cardData = RecipeDataForCard(data);
   return (
-    <RecipeDetailCard
-      data={data}
-      open={true}
-      onClose={() => router.push("/")}
-    />
+    <div>
+      <RecipeDetailCard data={cardData} open={true} />
+    </div>
   );
 }

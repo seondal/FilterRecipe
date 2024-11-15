@@ -5,4 +5,4 @@ export const GOOGLE_SEARCH = process.env.NEXT_PUBLIC_GOOGLE_SEARCH || "";
 
 export const DEVELOPER = process.env.NEXT_PUBLIC_DEVELOPER || "";
 
-export const SITE = process.env.NEXT_PUBLIC_SITE || "https://localhost:3000";
+export const SITE = process.env.NEXT_PUBLIC_SITE || "http://localhost:3000";
