@@ -5,34 +5,55 @@ import { myApi } from "../api/instance";
 import { RecipeI } from "@/interface/recipe";
 import { RecipeDataForCard } from "@/utils/transform";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Page() {
-  const [data, setData] = useState<RecipeI[]>();
+  const { data } = useSession();
+  const [recipeData, setRecipeData] = useState<RecipeI[]>();
 
   async function fetchFeed() {
-    const res = await myApi.get<RecipeI[]>("/recipe", {});
-    setData(res.data);
+    const res = await myApi.get<RecipeI[]>("/recipe", {
+      params: {
+        userid: data?.user.id,
+      },
+    });
+    setRecipeData(res.data);
   }
 
   useEffect(() => {
     fetchFeed();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.user.id]);
 
   if (!data) {
-    return <div aria-busy="true" />;
+    return (
+      <article>
+        <h4>업로드 기능은 로그인이 필요해요</h4>
+        <h6>로그인하고 나만의 레시피를 업로드하고 공유해보세요</h6>
+      </article>
+    );
   }
 
-  if (data.length === 0) {
-    return <h3>올린 레시피가 없어요</h3>;
+  if (!recipeData) {
+    return <article aria-busy="true" />;
+  }
+
+  if (recipeData.length === 0) {
+    return (
+      <article>
+        <h4>업로드한 레시피가 없어요</h4>
+        <h6>나만의 레시피를 업로드하고 공유해보세요</h6>
+      </article>
+    );
   }
 
   return (
     <>
-      <div className="flex flex-wrap gap-y-3 gap-x-1">
-        {data.map((item, idx) => (
+      <article className="flex flex-wrap gap-y-3 gap-x-1">
+        {recipeData.map((item, idx) => (
           <RecipeSmallCard data={RecipeDataForCard(item)} key={idx} />
         ))}
-      </div>
+      </article>
     </>
   );
 }

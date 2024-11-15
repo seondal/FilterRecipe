@@ -5,6 +5,7 @@ export interface ModalI {
 
 export interface RecipeCardDataI {
   id: string;
+  userId: string;
   title: string;
   description?: string;
   image: {

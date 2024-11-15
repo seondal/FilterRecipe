@@ -6,6 +6,7 @@ import {
   getDocs,
   or,
   query,
+  QueryCompositeFilterConstraint,
   serverTimestamp,
   setDoc,
   where,
@@ -20,13 +21,18 @@ export async function GET(req: NextRequest, res: NextResponse) {
   const searchParams = req.nextUrl.searchParams;
   const category = searchParams.get("category");
   const keyword = searchParams.get("keyword");
+  const userid = searchParams.get("userid");
 
   const ref = collection(db, "recipe");
 
   let q = query(ref);
+
+  if (userid) {
+    q = query(ref, where("userId", "==", userid));
+  }
+
   if (category) {
     const categoryArray = category.split(",");
-    console.log("🚀 ~ GET ~ categoryArray:", categoryArray);
     q = query(
       ref,
       or(
@@ -55,6 +61,15 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 /** POST Recipe */
 export async function POST(req: NextRequest, res: NextResponse) {
+  const searchParams = req.nextUrl.searchParams;
+  const userid = searchParams.get("userid");
+  if (!userid || userid === "") {
+    return NextResponse.json(
+      { error: "업로드는 로그인 후 가능해요" },
+      { status: 401 }
+    );
+  }
+
   try {
     const body = await req.formData();
 
@@ -77,6 +92,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const afterImgData = afterImageRes.data;
 
     const data = {
+      userId: userid,
       title: body.get("title") as string,
       image: {
         before: beforeImgData.data.url,

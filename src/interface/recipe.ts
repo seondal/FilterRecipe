@@ -20,6 +20,7 @@ export interface PropertiesI {
 
 export interface RecipeI {
   id: string;
+  userId: string;
   title: string;
   description?: string;
   image: {
