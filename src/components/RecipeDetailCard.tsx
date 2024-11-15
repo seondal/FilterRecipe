@@ -44,6 +44,10 @@ export default function RecipeDetailCard({
     alert("해당 기능은 아직 준비중이에요. 업데이트를 기다려주세요");
   }
 
+  function handleClickUserid() {
+    router.push(`/?userid=${data.userId}`);
+  }
+
   return (
     <dialog open={open}>
       <article className="">
@@ -78,10 +82,14 @@ export default function RecipeDetailCard({
           )}
         </div>
         <hr />
+        <a onClick={handleClickUserid} className="cursor-pointer">
+          @{data.userId}
+        </a>{" "}
+        &nbsp;
         <b>
           #{data.category.main} #{data.category.sub}
         </b>
-        &nbsp;
+        <br />
         {data.description}
         <footer>
           <button onClick={() => setShowRecipe((cur) => !cur)}>

@@ -6,6 +6,7 @@ import {
   getDocs,
   or,
   query,
+  QueryCompositeFilterConstraint,
   serverTimestamp,
   setDoc,
   where,
@@ -14,22 +15,24 @@ import { NextRequest, NextResponse } from "next/server";
 import { imgbbAPI } from "../instance";
 import { RecipeI } from "@/interface/recipe";
 import { SITE } from "@/constants/env";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
 
 /** GET Recipe */
 export async function GET(req: NextRequest, res: NextResponse) {
   const searchParams = req.nextUrl.searchParams;
   const category = searchParams.get("category");
   const keyword = searchParams.get("keyword");
+  const userid = searchParams.get("userid");
 
   const ref = collection(db, "recipe");
 
   let q = query(ref);
 
+  if (userid) {
+    q = query(ref, where("userId", "==", userid));
+  }
+
   if (category) {
     const categoryArray = category.split(",");
-    console.log("🚀 ~ GET ~ categoryArray:", categoryArray);
     q = query(
       ref,
       or(

@@ -11,18 +11,20 @@ export default function Page() {
   const params = useSearchParams();
   const category = params.get("category");
   const keyword = params.get("keyword");
+  const userid = params.get("userid");
 
   const [data, setData] = useState<RecipeI[]>();
 
   async function fetchFeed() {
     const res = await myApi.get<RecipeI[]>("/recipe", {
-      params: { keyword, category },
+      params: { keyword, category, userid },
     });
     setData(res.data);
   }
 
   useEffect(() => {
     fetchFeed();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   if (!data) {

@@ -6,9 +6,10 @@ import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import Category from "@/components/Category";
 
 export default function SearchBar() {
-  const searchParams = useSearchParams();
-  const keywordQuery = searchParams.get("keyword");
-  const categoryQuery = searchParams.get("category");
+  const params = useSearchParams();
+  const keywordQuery = params.get("keyword");
+  const categoryQuery = params.get("category");
+  const userid = params.get("userid");
 
   const [categoryActive, setCategoryActive] = useState(false);
 
@@ -24,7 +25,7 @@ export default function SearchBar() {
             name="keyword"
             type="search"
             placeholder="키워드로 검색하기"
-            defaultValue={keywordQuery ?? ""}
+            defaultValue={keywordQuery ?? userid ? `@${userid}` : ""}
           />
         </form>
         <button
