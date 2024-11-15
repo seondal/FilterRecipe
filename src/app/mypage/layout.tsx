@@ -13,19 +13,20 @@ function Page({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = useSession();
-  console.log("🚀 ~ sesseion:", session);
+  const { data } = useSession();
   const pathname = usePathname();
   const router = useRouter();
 
   return (
     <div>
       <article id="profile" className="flex justify-between items-center">
-        {session.data ? (
+        {data ? (
           <>
             <div>
               <UserCircleIcon className="icon-button mr-4" />
-              <strong>skttttt@devocean.com</strong>
+              <strong>{data.user?.name}님 안녕하세요</strong>
+              &nbsp;
+              <small>@{data.user?.id}</small>
             </div>
             <button className="secondary outline" onClick={() => signOut()}>
               로그아웃
