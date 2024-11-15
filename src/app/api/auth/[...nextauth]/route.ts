@@ -20,6 +20,7 @@ const authOptions: NextAuthOptions = {
       },
     }),
   },
+  debug: true,
 };
 
 // NextAuth 핸들러를 GET과 POST 메서드에 맞게 내보내기
