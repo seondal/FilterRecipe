@@ -26,7 +26,12 @@ export default function Page() {
   }, [data?.user.id]);
 
   if (!data) {
-    return <h3>로그인하고 레시피를 공유해보세요</h3>;
+    return (
+      <article>
+        <h4>업로드 기능은 로그인이 필요해요</h4>
+        <h6>로그인하고 나만의 레시피를 업로드하고 공유해보세요</h6>
+      </article>
+    );
   }
 
   if (!recipeData) {
@@ -34,7 +39,12 @@ export default function Page() {
   }
 
   if (recipeData.length === 0) {
-    return <h3>올린 레시피가 없어요</h3>;
+    return (
+      <article>
+        <h4>업로드한 레시피가 없어요</h4>
+        <h6>나만의 레시피를 업로드하고 공유해보세요</h6>
+      </article>
+    );
   }
 
   return (

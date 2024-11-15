@@ -1,6 +1,7 @@
 "use client";
 
 import { UserCircleIcon } from "@heroicons/react/20/solid";
+import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -33,7 +34,10 @@ function Page({
             </button>
           </>
         ) : (
-          <button onClick={() => signIn("kakao")}>로그인</button>
+          <button className="contrast" onClick={() => signIn("kakao")}>
+            <ChatBubbleOvalLeftEllipsisIcon className="icon-text" />
+            카카오로 소셜 로그인
+          </button>
         )}
       </article>
       <section id="navigation" role="search">
