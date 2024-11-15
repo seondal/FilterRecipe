@@ -16,6 +16,7 @@ export default function RecipePage({ params }: ParamsWithIdI) {
 
   useEffect(() => {
     fetchFeed();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!data) return <div aria-busy="true" />;
