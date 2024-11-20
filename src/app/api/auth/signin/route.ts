@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { kakaoApi } from "../../instance";
 import { KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI } from "@/constants/env";
-import { OAuthProvider } from "firebase/auth/web-extension";
-import { signInWithCredential } from "firebase/auth";
-import { auth } from "@/firebase";
-
 interface PostKakaoTokenI {
   access_token: string;
   token_type: string;
@@ -15,18 +11,9 @@ interface PostKakaoTokenI {
   refresh_token_expires_in: number;
 }
 
-interface FirebaseTokenI {
-  providerId: "oidc.kakao";
-  signinMethod: "oidc.kakao";
-  pendingToken: string;
-  idToken: string;
-}
-
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const code = searchParams.get("code");
-
-  const provider = new OAuthProvider("oidc.kakao");
 
   try {
     const kakaoRes = await kakaoApi.post<PostKakaoTokenI>(
@@ -43,13 +30,7 @@ export async function GET(req: NextRequest) {
         },
       }
     );
-    const { id_token } = kakaoRes.data;
-
-    const credential = provider.credential({
-      idToken: id_token,
-    });
-    const firebaseRes = await signInWithCredential(auth, credential);
-    const data = firebaseRes.user;
+    const data = kakaoRes.data;
 
     return NextResponse.json(data);
   } catch (error) {
