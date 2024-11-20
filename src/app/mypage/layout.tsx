@@ -21,7 +21,10 @@ export default function MypageLayout({ children }: LayoutI) {
     router.replace(KAKAO_AUTHORIZE);
   }
 
-  function signOut() {}
+  function signOut() {
+    auth.signOut();
+    router.refresh();
+  }
 
   return (
     <div>
