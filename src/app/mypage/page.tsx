@@ -5,16 +5,16 @@ import { myApi } from "../api/instance";
 import { RecipeI } from "@/interface/recipe";
 import { RecipeDataForCard } from "@/utils/transform";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { auth } from "@/firebase";
 
 export default function Page() {
-  const { data } = useSession();
+  const data = auth.currentUser;
   const [recipeData, setRecipeData] = useState<RecipeI[]>();
 
   async function fetchFeed() {
     const res = await myApi.get<RecipeI[]>("/recipe", {
       params: {
-        userid: data?.user.id,
+        userid: data?.uid,
       },
     });
     setRecipeData(res.data);
@@ -23,7 +23,7 @@ export default function Page() {
   useEffect(() => {
     fetchFeed();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.user.id]);
+  }, [data]);
 
   if (!data) {
     return (

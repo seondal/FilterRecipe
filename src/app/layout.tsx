@@ -7,15 +7,11 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { GOOGLE_ADSENSE, GOOGLE_ANALYITICS } from "@/constants/env";
 import { META_DATA } from "@/constants/META_DATA";
 import Header from "@/components/Header";
-import AuthContext from "@/context/AuthContext";
-import { getSession } from "next-auth/react";
 import { LayoutI } from "@/interface/page";
 
 export const metadata = META_DATA;
 
-export default async function RootLayout({ children }: LayoutI) {
-  const session = await getSession();
-
+export default function RootLayout({ children }: LayoutI) {
   return (
     <html lang="kor" className="modal-is-opening">
       <head>
@@ -25,12 +21,10 @@ export default async function RootLayout({ children }: LayoutI) {
           crossOrigin="anonymous"></Script>
       </head>
       <body className="max-w-mobile m-auto min-h-screen bg-default">
-        <AuthContext session={session}>
-          <header>
-            <Header />
-          </header>
-          <main className="p-4">{children}</main>
-        </AuthContext>
+        <header>
+          <Header />
+        </header>
+        <main className="p-4">{children}</main>
         <GoogleAnalytics gaId={GOOGLE_ANALYITICS} />
       </body>
     </html>

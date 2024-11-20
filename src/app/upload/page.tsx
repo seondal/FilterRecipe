@@ -2,14 +2,14 @@
 
 import FileInput from "@/components/FileInput";
 import { CATEGORY, PROPERTIES } from "@/constants";
-import { useSession } from "next-auth/react";
+import { auth } from "@/firebase";
 import { KeyboardEvent, useState } from "react";
 
 const NO_SELECTION = "선택 안함";
 const ETC = "기타";
 
 export default function UploadPage() {
-  const { data } = useSession();
+  const data = auth.currentUser;
   const [selectedMainCategory, setSelectedMainCategory] =
     useState(NO_SELECTION);
   const [beforeImage, setBeforeImage] = useState<File>();
@@ -43,7 +43,7 @@ export default function UploadPage() {
     <form
       encType="multipart/form-data"
       method="POST"
-      action={`/api/recipe?userid=${data?.user.id}`}
+      action={`/api/recipe?userid=${data?.uid}`}
       onKeyDown={handleKeyDownOnForm}>
       <label>
         *레시피 이름

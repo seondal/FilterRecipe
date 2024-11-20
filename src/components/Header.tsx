@@ -1,15 +1,15 @@
 "use client";
 
+import { auth } from "@/firebase";
 import {
   ArrowUpTrayIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
-  const { data } = useSession();
+  const data = auth.currentUser;
   const pathname = usePathname();
   const router = useRouter();
   const isMain = pathname === "/";

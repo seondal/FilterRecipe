@@ -18,6 +18,12 @@ interface RecipeDetailCardI extends ModalI {
   data: RecipeCardDataI;
 }
 
+function getShortString(longString: string, maxLength: number) {
+  return longString.length > maxLength
+    ? longString.slice(0, maxLength) + "..."
+    : longString;
+}
+
 export default function RecipeDetailCard({
   data,
   open,
@@ -83,7 +89,7 @@ export default function RecipeDetailCard({
         </div>
         <hr />
         <a onClick={handleClickUserid} className="cursor-pointer">
-          @{data.userId}
+          @{getShortString(data.userId, 12)}
         </a>{" "}
         &nbsp;
         <b>
