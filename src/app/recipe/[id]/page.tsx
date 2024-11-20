@@ -2,6 +2,7 @@
 
 import { myApi } from "@/app/api/instance";
 import RecipeDetailCard from "@/components/RecipeDetailCard";
+import { ParamsWithIdI } from "@/interface/page";
 import { RecipeI } from "@/interface/recipe";
 import { RecipeDataForCard } from "@/utils/transform";
 import { useEffect, useState } from "react";
@@ -16,6 +17,7 @@ export default function RecipePage({ params }: ParamsWithIdI) {
 
   useEffect(() => {
     fetchFeed();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!data) return <div aria-busy="true" />;

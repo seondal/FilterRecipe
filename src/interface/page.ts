@@ -1,7 +1,7 @@
-interface ParamsWithIdI {
+export interface ParamsWithIdI {
   params: { id: string };
 }
 
-type LayoutI = Readonly<{
+export type LayoutI = Readonly<{
   children: React.ReactNode;
 }>;

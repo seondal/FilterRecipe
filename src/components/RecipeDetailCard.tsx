@@ -18,6 +18,12 @@ interface RecipeDetailCardI extends ModalI {
   data: RecipeCardDataI;
 }
 
+function getShortString(longString: string, maxLength: number) {
+  return longString.length > maxLength
+    ? longString.slice(0, maxLength) + "..."
+    : longString;
+}
+
 export default function RecipeDetailCard({
   data,
   open,
@@ -42,6 +48,11 @@ export default function RecipeDetailCard({
 
   function handleBookmark() {
     alert("해당 기능은 아직 준비중이에요. 업데이트를 기다려주세요");
+  }
+
+  function handleClickUserid() {
+    router.push(`/?userid=${data.userId}`);
+    handleClose();
   }
 
   return (
@@ -78,10 +89,14 @@ export default function RecipeDetailCard({
           )}
         </div>
         <hr />
+        <a onClick={handleClickUserid} className="cursor-pointer">
+          @{getShortString(data.userId, 12)}
+        </a>{" "}
+        &nbsp;
         <b>
           #{data.category.main} #{data.category.sub}
         </b>
-        &nbsp;
+        <br />
         {data.description}
         <footer>
           <button onClick={() => setShowRecipe((cur) => !cur)}>

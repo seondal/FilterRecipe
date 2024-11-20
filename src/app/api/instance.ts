@@ -7,3 +7,7 @@ export const imgbbAPI = axios.create({
 });
 
 export const myApi = axios.create({ baseURL: `${SITE}/api` });
+
+export const kakaoApi = axios.create({
+  baseURL: `https://kauth.kakao.com`,
+});
