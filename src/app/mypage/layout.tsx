@@ -26,6 +26,17 @@ export default function MypageLayout({ children }: LayoutI) {
     router.refresh();
   }
 
+  async function handleCopyUserid() {
+    if (data) {
+      try {
+        await navigator.clipboard.writeText(data?.uid);
+        alert("내 아이디가 복사되었어요");
+      } catch (error) {
+        alert("내 아이디 복사에 실패했어요. 다시 시도해주세요");
+      }
+    }
+  }
+
   return (
     <div>
       {data ? (
@@ -33,7 +44,7 @@ export default function MypageLayout({ children }: LayoutI) {
           <article
             id="profile"
             className="flex justify-between items-center gap-2">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" onClick={handleCopyUserid}>
               {data.photoURL ? (
                 <Image
                   src={data.photoURL}
