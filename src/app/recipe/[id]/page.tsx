@@ -2,6 +2,7 @@
 
 import { myApi } from "@/app/api/instance";
 import RecipeDetailCard from "@/components/RecipeDetailCard";
+import { ParamsWithIdI } from "@/interface/page";
 import { RecipeI } from "@/interface/recipe";
 import { RecipeDataForCard } from "@/utils/transform";
 import { useEffect, useState } from "react";

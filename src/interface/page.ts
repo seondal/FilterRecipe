@@ -1,4 +1,4 @@
-interface ParamsWithIdI {
+export interface ParamsWithIdI {
   params: { id: string };
 }
 

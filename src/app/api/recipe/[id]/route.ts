@@ -1,4 +1,5 @@
 import { db } from "@/firebase";
+import { ParamsWithIdI } from "@/interface/page";
 import { doc, getDoc } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
