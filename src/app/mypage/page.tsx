@@ -49,11 +49,11 @@ export default function Page() {
 
   return (
     <>
-      <article className="flex flex-wrap gap-y-3 gap-x-1">
+      <div className="flex flex-wrap gap-y-3 gap-x-1">
         {recipeData.map((item, idx) => (
           <RecipeSmallCard data={RecipeDataForCard(item)} key={idx} />
         ))}
-      </article>
+      </div>
     </>
   );
 }
