@@ -1,22 +1,26 @@
 "use client";
 
+import { KAKAO_AUTHORIZE } from "@/constants/env";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
 import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import { LayoutI } from "@/interface/page";
 
 const MYPAGE = [
   { text: "업로드한 레시피", path: "/mypage" },
   { text: "저장한 레시피", path: "/mypage/bookmark" },
 ];
-function Page({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function MypageLayout({ children }: LayoutI) {
   const { data } = useSession();
   const pathname = usePathname();
   const router = useRouter();
+
+  async function signIn() {
+    router.replace(KAKAO_AUTHORIZE);
+  }
+
+  function signOut() {}
 
   return (
     <div>
@@ -29,12 +33,12 @@ function Page({
               &nbsp;
               <small>@{data.user?.id}</small>
             </div>
-            <button className="secondary outline" onClick={() => signOut()}>
+            <button className="secondary outline" onClick={signOut}>
               로그아웃
             </button>
           </>
         ) : (
-          <button className="contrast" onClick={() => signIn("kakao")}>
+          <button className="contrast" onClick={signIn}>
             <ChatBubbleOvalLeftEllipsisIcon className="icon-text" />
             카카오로 소셜 로그인
           </button>
@@ -54,5 +58,3 @@ function Page({
     </div>
   );
 }
-
-export default Page;
