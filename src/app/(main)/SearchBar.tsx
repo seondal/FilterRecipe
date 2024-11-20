@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import Category from "@/components/Category";
@@ -12,9 +12,11 @@ export default function SearchBar() {
   const userid = params.get("userid");
 
   const router = useRouter();
-  const [keyword, setKeyword] = useState(
-    keywordQuery ?? userid ? `@${userid}` : ""
-  );
+  const [keyword, setKeyword] = useState<string>("");
+
+  useEffect(() => {
+    setKeyword(keywordQuery ?? userid ? `@${userid}` : "");
+  }, [params]);
 
   const [categoryActive, setCategoryActive] = useState(false);
 

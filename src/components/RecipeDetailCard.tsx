@@ -52,6 +52,7 @@ export default function RecipeDetailCard({
 
   function handleClickUserid() {
     router.push(`/?userid=${data.userId}`);
+    handleClose();
   }
 
   return (
