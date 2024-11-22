@@ -37,7 +37,7 @@ export default function SigninPage({ searchParams }: SigninPageI) {
         const fbRes = await signInWithCredential(auth, credential);
 
         // 로그인 성공 후 리디렉션
-        router.replace("/mypage");
+        router.replace("/");
       } catch (error) {
         console.error("Error during sign-in:", error);
       }

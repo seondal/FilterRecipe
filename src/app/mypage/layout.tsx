@@ -18,7 +18,7 @@ export default function MypageLayout({ children }: LayoutI) {
 
   const data = auth.currentUser;
   async function signIn() {
-    router.replace(KAKAO_AUTHORIZE);
+    router.push(KAKAO_AUTHORIZE);
   }
 
   function signOut() {
