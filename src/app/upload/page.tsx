@@ -14,8 +14,10 @@ export default function UploadPage() {
     useState(NO_SELECTION);
   const [beforeImage, setBeforeImage] = useState<File>();
   const [afterImage, setAfterImage] = useState<File>();
+  const [loading, setLoading] = useState(false);
 
   const isSubmitActive =
+    !loading &&
     beforeImage !== null &&
     afterImage !== null &&
     selectedMainCategory !== NO_SELECTION;
@@ -39,12 +41,17 @@ export default function UploadPage() {
     }
   }
 
+  function handleSubmit() {
+    setLoading(true);
+  }
+
   return (
     <form
       encType="multipart/form-data"
       method="POST"
       action={`/api/recipe?userid=${data?.uid}`}
-      onKeyDown={handleKeyDownOnForm}>
+      onKeyDown={handleKeyDownOnForm}
+      onSubmit={handleSubmit}>
       <label>
         *레시피 이름
         <input
@@ -128,7 +135,14 @@ export default function UploadPage() {
       <label>
         설명 <textarea maxLength={300} name="description" />
       </label>
-      <input type="submit" value="레시피 등록하기" disabled={!isSubmitActive} />
+
+      <button
+        type="submit"
+        disabled={!isSubmitActive}
+        aria-busy={loading}
+        aria-label="업로드 중입니다...">
+        레시피 등록하기
+      </button>
     </form>
   );
 }
