@@ -15,7 +15,8 @@ export default function Category({ open, onClose }: CategoryI) {
     return searchParam.has({ category: name }) !== undefined;
   }
 
-  function handleSelectCategory(name: string) {
+  function handleSelectCategory(e: ChangeEvent<HTMLInputElement>) {
+    const name = e.target.id;
     const param = { category: name };
     if (searchParam.has(param)) {
       searchParam.del(param);
@@ -40,10 +41,11 @@ export default function Category({ open, onClose }: CategoryI) {
           <div key={main.text} className="flex gap-4 mb-4">
             <label className="min-w-fit">
               <input
+                id={main.text}
                 type="checkbox"
                 name="main"
-                onChange={() => handleSelectCategory(main.text)}
-                defaultChecked={isChecked(main.text)}
+                onChange={(e) => handleSelectCategory(e)}
+                checked={isChecked(main.text)}
               />
               <strong>{main.text}</strong>
             </label>
@@ -51,10 +53,11 @@ export default function Category({ open, onClose }: CategoryI) {
               {main.sub.map((sub) => (
                 <label key={sub}>
                   <input
+                    id={sub}
                     type="checkbox"
                     name="sub"
-                    onClick={() => handleSelectCategory(sub)}
-                    defaultChecked={isChecked(sub)}
+                    onChange={(e) => handleSelectCategory(e)}
+                    checked={isChecked(sub)}
                   />
                   {sub}
                 </label>
