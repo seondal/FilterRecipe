@@ -14,8 +14,19 @@ export default function SearchBar() {
   const router = useRouter();
   const [keyword, setKeyword] = useState<string>("");
 
+  function getDisplayedKeyword() {
+    if (keywordQuery) return keywordQuery;
+    if (userid) return `@${userid}`;
+    if (categoryQuery) {
+      const categoryArray = categoryQuery.split(",").map((item) => `#${item}`);
+      return categoryArray.join(" ");
+    }
+    return "";
+  }
+
   useEffect(() => {
-    setKeyword(keywordQuery ?? userid ? `@${userid}` : "");
+    setKeyword(getDisplayedKeyword());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   const [categoryActive, setCategoryActive] = useState(false);
@@ -32,6 +43,15 @@ export default function SearchBar() {
       return router.push(`/?userid=${tmpUserid}`);
     }
 
+    if (keyword.startsWith("#")) {
+      const searchedCategoreis = keyword
+        .split(" ")
+        .filter((item) => item.startsWith("#"))
+        .map((item) => item.substring(1));
+      const categoryQueryString = searchedCategoreis.join(",");
+      return router.push(`/?category=${categoryQueryString}`);
+    }
+
     return router.push(`/?keyword=${keyword}`);
   }
 
@@ -42,7 +62,7 @@ export default function SearchBar() {
           <input
             name="keyword"
             type="search"
-            placeholder="키워드로 검색하기"
+            placeholder="키워드,@사용자,#카테고리 검색"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />

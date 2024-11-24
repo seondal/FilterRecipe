@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { LayoutI } from "@/interface/page";
 import { auth } from "@/firebase";
 import Image from "next/image";
+import copyToClipboard from "@/utils/copyToClipboard";
 
 const MYPAGE = [
   { text: "업로드한 레시피", path: "/mypage" },
@@ -17,8 +18,9 @@ export default function MypageLayout({ children }: LayoutI) {
   const router = useRouter();
 
   const data = auth.currentUser;
+  console.log("🚀 ~ MypageLayout ~ data:", data);
   async function signIn() {
-    router.replace(KAKAO_AUTHORIZE);
+    router.push(KAKAO_AUTHORIZE);
   }
 
   function signOut() {
@@ -28,12 +30,7 @@ export default function MypageLayout({ children }: LayoutI) {
 
   async function handleCopyUserid() {
     if (data) {
-      try {
-        await navigator.clipboard.writeText(data?.uid);
-        alert("내 아이디가 복사되었어요");
-      } catch (error) {
-        alert("내 아이디 복사에 실패했어요. 다시 시도해주세요");
-      }
+      copyToClipboard(data.uid, "내 아이디가 복사되었어요");
     }
   }
 

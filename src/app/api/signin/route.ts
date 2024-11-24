@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { kakaoApi } from "../../instance";
 import { KAKAO_CLIENT_ID, KAKAO_REDIRECT_URI } from "@/constants/env";
+import { kakaoApi } from "../instance";
 interface PostKakaoTokenI {
   access_token: string;
   token_type: string;

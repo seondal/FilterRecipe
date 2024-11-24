@@ -48,7 +48,10 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const filteredDocs: DocumentData[] = [];
     snapshot.forEach((doc) => {
       const data = doc.data();
-      if (data.description && data.description.includes(keyword)) {
+      if (
+        data.title.includes(keyword) ||
+        (data.description && data.description.includes(keyword))
+      ) {
         filteredDocs.push(data);
       }
     });
