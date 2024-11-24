@@ -2,6 +2,7 @@
 
 import { SITE } from "@/constants/env";
 import { ModalI, RecipeCardDataI } from "@/interface/component";
+import copyToClipboard from "@/utils/copyToClipboard";
 import {
   ArrowPathIcon,
   EyeIcon,
@@ -35,8 +36,10 @@ export default function RecipeDetailCard({
   const [showRecipe, setShowRecipe] = useState(false);
 
   function handleShare() {
-    navigator.clipboard.writeText(`${SITE}/recipe/${data.id}`);
-    alert("레시피를 공유할 수 있는 링크가 클립보드에 복사되었어요!");
+    copyToClipboard(
+      `${SITE}/recipe/${data.id}`,
+      "레시피를 공유할 수 있는 링크가 클립보드에 복사되었어요!"
+    );
   }
 
   function handleClose() {
