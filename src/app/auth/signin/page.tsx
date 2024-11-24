@@ -3,13 +3,14 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { myApi } from "@/app/api/instance";
-import { auth } from "@/firebase";
+import { auth, db } from "@/firebase";
 import {
   browserLocalPersistence,
   OAuthProvider,
   setPersistence,
   signInWithCredential,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 interface SigninPageI {
   searchParams: { code: string };
@@ -23,7 +24,7 @@ export default function SigninPage({ searchParams }: SigninPageI) {
     const signIn = async () => {
       try {
         // API 호출
-        const res = await myApi.get(`/auth/signin`, { params: { code: code } });
+        const res = await myApi.get(`/signin`, { params: { code: code } });
         const data = res.data;
 
         // OAuth provider 설정
@@ -35,9 +36,23 @@ export default function SigninPage({ searchParams }: SigninPageI) {
         // Firebase 인증 설정 및 로그인
         await setPersistence(auth, browserLocalPersistence);
         const fbRes = await signInWithCredential(auth, credential);
+        const fbData = fbRes.user;
+
+        console.log("🚀 ~ signIn ~ fbData:", fbData);
+        // 유저 정보 저장
+        const newRef = doc(db, "user", fbData.uid);
+        const newDoc = {
+          name: fbData.displayName,
+          email: fbData.email,
+          phoneNumber: fbData.phoneNumber,
+          photoURL: fbData.photoURL,
+          providerId: fbData.providerId,
+          providerData: fbData.providerData,
+        };
+        await setDoc(newRef, newDoc);
 
         // 로그인 성공 후 리디렉션
-        alert(`${fbRes.user.displayName}님, 로그인에 성공했어요`);
+        alert(`${fbData.displayName}님, 로그인에 성공했어요`);
         router.replace("/");
       } catch (error) {
         console.error("Error during sign-in:", error);
@@ -46,6 +61,5 @@ export default function SigninPage({ searchParams }: SigninPageI) {
 
     signIn();
   }, [code, router]);
-
   return <div>로그인중...</div>;
 }

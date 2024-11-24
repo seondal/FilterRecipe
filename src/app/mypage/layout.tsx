@@ -17,6 +17,7 @@ export default function MypageLayout({ children }: LayoutI) {
   const router = useRouter();
 
   const data = auth.currentUser;
+  console.log("🚀 ~ MypageLayout ~ data:", data);
   async function signIn() {
     router.push(KAKAO_AUTHORIZE);
   }

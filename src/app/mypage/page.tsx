@@ -9,6 +9,7 @@ import { auth } from "@/firebase";
 
 export default function Page() {
   const data = auth.currentUser;
+  console.log("🚀 ~ Page ~ data:", data);
   const [recipeData, setRecipeData] = useState<RecipeI[]>();
 
   async function fetchFeed() {
