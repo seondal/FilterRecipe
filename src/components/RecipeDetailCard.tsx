@@ -55,6 +55,11 @@ export default function RecipeDetailCard({
     handleClose();
   }
 
+  function handleClickCategory(value: string) {
+    router.push(`/?category=${value}`);
+    handleClose();
+  }
+
   return (
     <dialog open={open}>
       <article className="">
@@ -93,8 +98,11 @@ export default function RecipeDetailCard({
           @{getShortString(data.userId, 12)}
         </a>{" "}
         &nbsp;
-        <b>
-          #{data.category.main} #{data.category.sub}
+        <b onClick={() => handleClickCategory(data.category.main)}>
+          #{data.category.main}
+        </b>{" "}
+        <b onClick={() => handleClickCategory(data.category.sub)}>
+          #{data.category.sub}
         </b>
         <br />
         {data.description}
