@@ -86,6 +86,8 @@ export default function RecipeDetailCard({
               alt=""
               fill
               style={{ objectFit: "cover" }}
+              sizes="100%"
+              priority
             />
           ) : (
             <Image
@@ -93,6 +95,8 @@ export default function RecipeDetailCard({
               alt=""
               fill
               style={{ objectFit: "cover" }}
+              sizes="100%"
+              priority
             />
           )}
         </div>

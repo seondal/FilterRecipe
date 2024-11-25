@@ -31,6 +31,7 @@ export default function RecipeSmallCard({ data }: RecipeSmallCardI) {
               alt=""
               fill
               className="object-cover rounded-l-md"
+              sizes="100%"
             />
           </div>
           <div className="relative flex-1 rounded-md">
@@ -39,6 +40,7 @@ export default function RecipeSmallCard({ data }: RecipeSmallCardI) {
               alt=""
               fill
               className="object-cover rounded-r-md"
+              sizes="100%"
             />
           </div>
         </div>
