@@ -34,7 +34,7 @@ export default function FileInput({ id, label, setImage }: FileInputI) {
         onChange={handleImageChange}
       />
       {previewUrl ? (
-        <Image src={previewUrl} alt="" fill />
+        <Image src={previewUrl} alt="" fill sizes="100%" />
       ) : (
         <>
           <PlusCircleIcon className="icon-text" />
