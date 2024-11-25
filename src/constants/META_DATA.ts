@@ -6,12 +6,21 @@ export const META_DATA: Metadata = {
     default: `필터레시피`,
     template: `필터레시피 | %s`,
   },
-  description:
-    "사진 보정 레시피 모아보기, 인스타 감성 보정팁 나눔, 아이폰 보정법 모음",
+  description: "#아이폰 #인스타 보정법 모아보기",
+  keywords: [
+    "보정",
+    "보정법",
+    "아이폰",
+    "인스타",
+    "필터",
+    "보정팁",
+    "아이폰 보정",
+    "인스타 보정",
+    "사진 보정",
+  ],
   openGraph: {
     title: "필터레시피",
-    description:
-      "사진 보정 레시피 모아보기, 인스타 감성 보정팁 나눔, 아이폰 보정법 모음",
+    description: "#아이폰 #인스타 보정법 모아보기",
     images: ["/meta/og.png"],
   },
   icons: {
