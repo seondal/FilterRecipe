@@ -1,5 +1,6 @@
 "use client";
 
+import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 };
 
 function ReactSwagger({ spec }: Props) {
-  return <ReactSwagger spec={spec} />;
+  return <SwaggerUI spec={spec} />;
 }
 
 export default ReactSwagger;
