@@ -18,6 +18,7 @@ export async function generateMetadata({
       title: titleString,
       description: descriptionString,
       url: `${SITE}/recipe/${params.id}`,
+      siteName: `Filter Recipe`,
       images: [
         {
           url: data.image.after,
