@@ -1,5 +1,6 @@
 "use client";
 
+import { DEVELOPER } from "@/constants/env";
 import { auth } from "@/firebase";
 import {
   ArrowUpTrayIcon,
@@ -7,6 +8,7 @@ import {
   UserCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
@@ -50,7 +52,14 @@ export default function Header() {
           </div>
         </nav>
       ) : (
-        <XMarkIcon onClick={() => router.back()} className="icon-button" />
+        <nav className="flex items-center gap-4">
+          {DEVELOPER !== "" && (
+            <a target="_blank" href={DEVELOPER}>
+              문의하기
+            </a>
+          )}
+          <XMarkIcon onClick={() => router.back()} className="icon-button" />
+        </nav>
       )}
     </nav>
   );
