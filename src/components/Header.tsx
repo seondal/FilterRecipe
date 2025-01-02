@@ -53,7 +53,11 @@ export default function Header() {
         </nav>
       ) : (
         <nav className="flex items-center gap-4">
-          {DEVELOPER !== "" && <Link href={DEVELOPER}>문의하기</Link>}
+          {DEVELOPER !== "" && (
+            <a target="_blank" href={DEVELOPER}>
+              문의하기
+            </a>
+          )}
           <XMarkIcon onClick={() => router.back()} className="icon-button" />
         </nav>
       )}
